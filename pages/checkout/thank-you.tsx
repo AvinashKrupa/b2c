@@ -7,13 +7,14 @@ import VisitNunchiBanner from "../../app/components/common/VisitNunchiBanner";
 import { NextPage } from "next";
 
 interface iProps { }
-const ThankYou: NextPage = (props: any) => {
+const ThankYou: NextPage = () => {
   const router = useRouter();
   const { merchantPaymentRefId } = router.query;
   const [authStatus, setAuthStatus] = useState<string>("");
   const [rupifiResponse, setRupifiResponse] = useState<any>({});
   const [startDate,] = useState(new Date());
   const [deliveryDate, setDeliveyDate] = useState(new Date());
+  const [orderItems,setOrderItem]=useState([1,2])
   const months = [
     "January",
     "February",
@@ -178,138 +179,58 @@ const ThankYou: NextPage = (props: any) => {
         <div className="row cartItem m-3">
           <div className="col-md-12 col-lg-8">
             <h4 className="fs-20 font-m text-color-1 text-start">
-              Order Summary
+              Order summary
             </h4>
             <div className=" text-start">
-              <div className="bgbar position-relative mt-4 ms-0">
-                <div className="row">
-                  <div className="col-md-3 col-lg-3">
-                    <div className="imgbar ">
-                      <img className="w-100" src="/images/img1.png" alt="" />
-                    </div>
+
+            {orderItems?.length != 0 &&
+       orderItems?.map((item: any, index: number) => {
+              return ( <div className="bgbar position-relative mt-4 ms-0" key={index}>
+              <div className="row">
+                <div className="col-md-3 col-lg-3">
+                  <div className="imgbar ">
+                    <img className="w-100" src="/images/img1.png" alt="" />
                   </div>
-                  <div className="col-md-9 position-relative">
-                    <h3 className="fs-16 font-sb text-color-2">Anubhutee</h3>
-                    <p className="fs-14 font-r text-color-1 pt-1 prodes">
-                      Women Teal Blue &amp; Beige Ethnic Motifs Printed Straight
-                      Kurti
+                </div>
+                <div className="col-md-9 position-relative">
+                  <h3 className="fs-16 font-sb text-color-2">Anubhutee</h3>
+                  <p className="fs-14 font-r text-color-1 pt-1 prodes">
+                    Women Teal Blue &amp; Beige Ethnic Motifs Printed Straight
+                    Kurti
+                  </p>
+                  <div className="d-flex pt-3">
+                    <p className="fs-14 font-sb text-color-1">
+                      Size: <span className="text-color-2">XL</span>
                     </p>
-                    <div className="d-flex pt-3">
-                      <p className="fs-14 font-sb text-color-1">
-                        Size: <span className="text-color-2">XL</span>
-                      </p>
-                      <p className="fs-14 font-sb text-color-1 ms-4">
-                        Colour: <span className="text-color-2">Blue</span>
-                      </p>
-                      <p className="fs-14 font-sb text-color-1 ms-4">
-                        Qty: <span className="text-color-2">3</span>
-                      </p>
-                    </div>
-                    <div className="d-flex pt-2">
-                      <p className="fs-14 font-sb text-color-1">
-                        Size: <span className="text-color-2">XL</span>
-                      </p>
-                      <p className="fs-14 font-sb text-color-1 ms-4">
-                        Colour: <span className="text-color-2">Blue</span>
-                      </p>
-                      <p className="fs-14 font-sb text-color-1 ms-4">
-                        Qty: <span className="text-color-2">3</span>
-                      </p>
-                    </div>
-                    <div className="d-flex topBarAlign">
-                      <p className="fs-16 font-b text-color-3 align-self-center me-3">
-                        ₹3,499
-                      </p>
-                    </div>
+                    <p className="fs-14 font-sb text-color-1 ms-4">
+                      Colour: <span className="text-color-2">Blue</span>
+                    </p>
+                    <p className="fs-14 font-sb text-color-1 ms-4">
+                      Qty: <span className="text-color-2">3</span>
+                    </p>
+                  </div>
+                  <div className="d-flex pt-2">
+                    <p className="fs-14 font-sb text-color-1">
+                      Size: <span className="text-color-2">XL</span>
+                    </p>
+                    <p className="fs-14 font-sb text-color-1 ms-4">
+                      Colour: <span className="text-color-2">Blue</span>
+                    </p>
+                    <p className="fs-14 font-sb text-color-1 ms-4">
+                      Qty: <span className="text-color-2">3</span>
+                    </p>
+                  </div>
+                  <div className="d-flex topBarAlign">
+                    <p className="fs-16 font-b text-color-3 align-self-center me-3">
+                      ₹3,499
+                    </p>
                   </div>
                 </div>
               </div>
-              <div className="bgbar position-relative mt-4  ms-0">
-                <div className="row">
-                  <div className="col-md-3 col-lg-3">
-                    <div className="imgbar ">
-                      <img className="w-100" src="/images/img1.png" alt="" />
-                    </div>
-                  </div>
-                  <div className="col-md-9 position-relative">
-                    <h3 className="fs-16 font-sb text-color-2">Anubhutee</h3>
-                    <p className="fs-14 font-r text-color-1 pt-1 prodes">
-                      Women Teal Blue &amp; Beige Ethnic Motifs Printed Straight
-                      Kurti
-                    </p>
-                    <div className="d-flex pt-3">
-                      <p className="fs-14 font-sb text-color-1">
-                        Size: <span className="text-color-2">XL</span>
-                      </p>
-                      <p className="fs-14 font-sb text-color-1 ms-4">
-                        Colour: <span className="text-color-2">Blue</span>
-                      </p>
-                      <p className="fs-14 font-sb text-color-1 ms-4">
-                        Qty: <span className="text-color-2">3</span>
-                      </p>
-                    </div>
-                    <div className="d-flex pt-2">
-                      <p className="fs-14 font-sb text-color-1">
-                        Size: <span className="text-color-2">XL</span>
-                      </p>
-                      <p className="fs-14 font-sb text-color-1 ms-4">
-                        Colour: <span className="text-color-2">Blue</span>
-                      </p>
-                      <p className="fs-14 font-sb text-color-1 ms-4">
-                        Qty: <span className="text-color-2">3</span>
-                      </p>
-                    </div>
-                    <div className="d-flex topBarAlign">
-                      <p className="fs-16 font-b text-color-3 align-self-center me-3">
-                        ₹3,499
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="bgbar position-relative mt-4  ms-0">
-                <div className="row">
-                  <div className="col-md-3 col-lg-3">
-                    <div className="imgbar ">
-                      <img className="w-100" src="/images/img1.png" alt="" />
-                    </div>
-                  </div>
-                  <div className="col-md-9 position-relative">
-                    <h3 className="fs-16 font-sb text-color-2">Anubhutee</h3>
-                    <p className="fs-14 font-r text-color-1 pt-1 prodes">
-                      Women Teal Blue &amp; Beige Ethnic Motifs Printed Straight
-                      Kurti
-                    </p>
-                    <div className="d-flex pt-3">
-                      <p className="fs-14 font-sb text-color-1">
-                        Size: <span className="text-color-2">XL</span>
-                      </p>
-                      <p className="fs-14 font-sb text-color-1 ms-4">
-                        Colour: <span className="text-color-2">Blue</span>
-                      </p>
-                      <p className="fs-14 font-sb text-color-1 ms-4">
-                        Qty: <span className="text-color-2">3</span>
-                      </p>
-                    </div>
-                    <div className="d-flex pt-2">
-                      <p className="fs-14 font-sb text-color-1">
-                        Size: <span className="text-color-2">XL</span>
-                      </p>
-                      <p className="fs-14 font-sb text-color-1 ms-4">
-                        Colour: <span className="text-color-2">Blue</span>
-                      </p>
-                      <p className="fs-14 font-sb text-color-1 ms-4">
-                        Qty: <span className="text-color-2">3</span>
-                      </p>
-                    </div>
-                    <div className="d-flex topBarAlign">
-                      <p className="fs-16 font-b text-color-3 align-self-center me-3">
-                        ₹3,499
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            </div>)
+            })}
+
+
             </div>
             <hr className="my-4 my-md-5" />
             <div className="row text-start">
@@ -443,7 +364,7 @@ const ThankYou: NextPage = (props: any) => {
               </div>
             </div>
           </div>
-          <div className="col-md-12 col-lg-4">
+          {/* <div className="col-md-12 col-lg-4">
             <div className="row">
               <div className="col-md-12">
                 <h4 className="fs-20 font-m text-color-1 text-start">
@@ -515,7 +436,7 @@ const ThankYou: NextPage = (props: any) => {
 
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </section>
       {/* <section className="mt-5">
@@ -523,7 +444,9 @@ const ThankYou: NextPage = (props: any) => {
           <img className="w-100" src="images/advertise.png" alt="" />
         </a>
       </section> */}
+      <div className="m-3">
       <VisitNunchiBanner />
+        </div>
     </div>
   );
 }
