@@ -6,9 +6,9 @@ const FooterFixedButton = () => {
             <a href="#" className="scrollToTop">
                 <i className="fas fa-angles-up" />
             </a>
-            <a href="#" className="whatsapp">
+            {/* <a href="#" className="whatsapp">
                 <i className="fa-brands fa-whatsapp" />
-            </a>
+            </a> */}
         </div>
     )
 }

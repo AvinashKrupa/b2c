@@ -53,7 +53,7 @@ const CheckoutStepB = (props: any) => {
               <div className="row mt-4 mt-md-0">
                 <div className="col-sm-6 mb-4">
                   <label htmlFor="firstName" className="form-label">
-                    First name
+                    First name*
                   </label>
                   <input
                     type="text"
@@ -70,7 +70,7 @@ const CheckoutStepB = (props: any) => {
                 </div>
                 <div className="col-sm-6  mb-4">
                   <label htmlFor="lastName" className="form-label">
-                    Last name
+                    Last name*
                   </label>
                   <input
                     type="text"
@@ -87,13 +87,13 @@ const CheckoutStepB = (props: any) => {
                 </div>
                 <div className="col-12  mb-4">
                   <label htmlFor="address" className="form-label">
-                    Address
+                    Address*
                   </label>
                   <input
                     type="text"
                     className="form-control"
                     id="address"
-                    placeholder="#45, Avenue Towers, Scalpel Road"
+                    placeholder="#45, Avenue towers, scalpel road"
                     required
                     onChange={props.handleChange}
                     name="line_1"
@@ -102,14 +102,14 @@ const CheckoutStepB = (props: any) => {
                 </div>
                 <div className="col-12  mb-4">
                   <label htmlFor="address2" className="form-label">
-                    Apartment, Street, Landmark
+                    Apartment, street, landmark*
                     <span className="text-muted">(Optional)</span>
                   </label>
                   <input
                     type="text"
                     className="form-control"
                     id="address2"
-                    placeholder="80 Feet Road, Behind Hindu Temple"
+                    placeholder="80 Feet road, behind hindu temple"
                     onChange={props.handleChange}
                     name="line_2"
                     required
@@ -118,7 +118,7 @@ const CheckoutStepB = (props: any) => {
                 </div>
                 <div className="col-sm-6  mb-4">
                   <label htmlFor="lastName" className="form-label">
-                    City
+                    City*
                   </label>
                   <input
                     type="text"
@@ -134,7 +134,7 @@ const CheckoutStepB = (props: any) => {
                 </div>
                 <div className="col-md-3 ">
                   <label htmlFor="zip" className="form-label">
-                    Postal Code
+                    Postal code*
                   </label>
                   <input
                     type="text"
@@ -150,7 +150,7 @@ const CheckoutStepB = (props: any) => {
               </div>
               <div className="mt-4">
                 <label htmlFor="zip" className="form-label">
-                  Address Type
+                  Address type*
                 </label>
                 <div className="d-flex">
                   <div className="form-check mt-4">
@@ -206,9 +206,9 @@ const CheckoutStepB = (props: any) => {
                   Next
                 </button>
               </div>
-              <div className="seprtor">
+              {/* <div className="seprtor">
                 <span>or</span>
-              </div>
+              </div> */}
               <div className="mt-5">
                 <div className="form-check  mt-4">
                   <input

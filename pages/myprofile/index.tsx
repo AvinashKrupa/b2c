@@ -106,7 +106,7 @@ const OrderHistoryScreen: NextPage = () => {
                                   />
                                 </div>
                               </div>
-                              <div className="col-12 col-sm-6">
+                              {/* <div className="col-12 col-sm-6">
                                 <div className="form-group">
                                   <label>Password</label>
                                   <input
@@ -115,7 +115,7 @@ const OrderHistoryScreen: NextPage = () => {
                                     placeholder="**********"
                                   />
                                 </div>
-                              </div>
+                              </div> */}
                               <div className="col-12 col-sm-6">
                                 <div className="form-group">
                                   <label>E-mail</label>
@@ -127,7 +127,7 @@ const OrderHistoryScreen: NextPage = () => {
                                   />
                                 </div>
                               </div>
-                              <div className="col-12 col-sm-6">
+                              {/* <div className="col-12 col-sm-6">
                                 <div className="form-group">
                                   <label>Two Factor Authentication</label>
                                   <input
@@ -136,7 +136,7 @@ const OrderHistoryScreen: NextPage = () => {
                                     placeholder="Enabled"
                                   />
                                 </div>
-                              </div>
+                              </div> */}
                               <div className="col-12 col-sm-6 mb-5">
                                 <div className="form-group">
                                   <label>Mobile Number</label>

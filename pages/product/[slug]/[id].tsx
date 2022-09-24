@@ -458,7 +458,7 @@ const ProductDetailScreen: NextPage = () => {
                     >
                       <li className="nav-item" role="presentation">
                         <button
-                          className={`nav-link font-sb bg-1 ${selectedSection == 1 ? "active" : ""
+                          className={`nav-link font-sb bg-1 mt-3 ${selectedSection == 1 ? "active" : ""
                             }`}
                           id="home-tab"
                           data-bs-toggle="tab"
@@ -487,7 +487,7 @@ const ProductDetailScreen: NextPage = () => {
                           Description
                         </button>
                       </li>
-                      <li className="nav-item" role="presentation">
+                      {/* <li className="nav-item" role="presentation">
                         <button
                           className={`nav-link font-sb bg-2 second ${selectedSection == 2 ? "active" : ""
                             }`}
@@ -542,7 +542,7 @@ const ProductDetailScreen: NextPage = () => {
                           </svg>
                           Reviews
                         </button>
-                      </li>
+                      </li> */}
                     </ul>
                     <div className="tab-content" id="myTabContent">
                       <div
@@ -554,7 +554,7 @@ const ProductDetailScreen: NextPage = () => {
                       >
                         {product?.getDescription()}
                       </div>
-                      <div
+                      {/* <div
                         className={`tab-pane fade show ${selectedSection == 2 ? "active" : ""
                           }`}
                         id="profile"
@@ -1136,7 +1136,7 @@ const ProductDetailScreen: NextPage = () => {
                             </ul>
                           </div>
                         </div>
-                      </div>
+                      </div> */}
                     </div>
                   </section>
                   <section className="d-none d-lg-block">
@@ -1167,13 +1167,13 @@ const ProductDetailScreen: NextPage = () => {
               )
             }
             {/* Similar Products */}
-            <DetailSimilarProducts />
+            {/* <DetailSimilarProducts /> */}
             {/* End Similar Products */}
             {/* Upsell Cross sell */}
-            <DetailUpsellCrossSell />
+            {/* <DetailUpsellCrossSell /> */}
             {/* End Upsell Cross sell */}
             {/* Recently Viewed */}
-            <DetailRecentlyViewed />
+            {/* <DetailRecentlyViewed /> */}
             {/* End Recently Viewed */}
           </div>
           <Footer />
@@ -1190,14 +1190,14 @@ const ProductDetailScreen: NextPage = () => {
                         ₹{product?.getOffAmount()} off ({product?.getOffPercent()}
                         %)
                       </span>
-                      <span className="mx-3">or</span>
+                      {/* <span className="mx-3">or</span>
                       <span className="fs-13">
                         ₹3,399 +<img src="/images/coins.png" alt="" /> 51
-                      </span>
+                      </span> */}
                     </div>
-                    <h5 className="fs-10 text-color-7 mt-2">
+                    {/* <h5 className="fs-10 text-color-7 mt-2">
                       {product?.getStockLine()}
-                    </h5>
+                    </h5> */}
                   </li>
                   <li className="list-inline-item offset-lg-2 mt-3 mt-lg-0 text-center text-lg-start">
                     <a className="product-block">
@@ -1207,7 +1207,7 @@ const ProductDetailScreen: NextPage = () => {
                             deleteFromWishlist(product.getId())
                           }else{
                             addToWishList(product.getId())
-                          }                          
+                          }
                         }}
                         type="button"
                         className={`btn-heart ${
@@ -1223,7 +1223,7 @@ const ProductDetailScreen: NextPage = () => {
                       href="#"
                       className="btn-border fs-20 me-2 d-none d-lg-inline-block"
                     >
-                      Request Semple
+                      Request Sample
                     </a>
                     <a href="#" className="btn-border fs-20 me-2 d-lg-none">
                       Wishlist
@@ -1246,7 +1246,7 @@ const ProductDetailScreen: NextPage = () => {
                         cartItems?.includes(product.getId()) || false
                           ? "Go To Cart"
                           : "Add to Cart"
-                      }  
+                      }
                     </a>
                   </li>
                 </ul>

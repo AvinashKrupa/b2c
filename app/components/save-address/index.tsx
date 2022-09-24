@@ -250,9 +250,9 @@ const SaveAddress = () => {
                         >
                           EDIT
                         </button>
-                        <button type="button" className="address-btn">
+                        {/* <button type="button" className="address-btn">
                           SHARE
-                        </button>
+                        </button> */}
                         <button
                           type="button"
                           className="address-btn"

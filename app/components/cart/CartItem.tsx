@@ -60,14 +60,14 @@ const CartItem = (props: any) => {
     <>
       <div className="bgbar position-relative mt-4">
         <div className="row">
-          <div className="form-check">
+          {/* <div className="form-check">
             <input
               className="form-check-input"
               type="checkbox"
               defaultValue={""}
               id="flexCheckDefault"
             />
-          </div>
+          </div> */}
           <div className="col-md-3 col-lg-3">
             <div className="imgbar ">
               <a href={Permalink.ofProduct(props)}>
@@ -79,7 +79,7 @@ const CartItem = (props: any) => {
             <a href={Permalink.ofProduct(props)}>
               <h3 className="fs-16 font-sb text-color-2">{props.name}</h3>
             </a>
-            <p className="fs-14 font-r text-color-1 pt-1 prodes">
+            <p className="fs-14 font-r text-color-1 pt-1 prodes" style={{width:380}}>
               {props.description}
             </p>
             <div className="d-flex py-3">

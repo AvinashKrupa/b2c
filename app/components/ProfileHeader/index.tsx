@@ -51,7 +51,7 @@ const Header = () => {
                   </span>
                   <input
                     type="text"
-                    className="form-control fs-16"
+                    className="form-control fs-12"
                     defaultValue="Search"
                     aria-label="Kurtis"
                     aria-describedby="addon-wrapping"
