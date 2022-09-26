@@ -6,9 +6,11 @@ import Permalink from "../../../utils/Permalink";
 import useUserStore from "../../../zustand/store";
 import shallow from "zustand/shallow";
 import CommonIconBar from "../common/CommonIconBar";
+import SearchPopup from "../common/SearchPopup";
 
 const Header = () => {
-  const router = useRouter();
+  const router = useRouter();  
+  const [openSearchBox, setOpenSearchBox] = useState<boolean>(false);
   const [showProfile, setShowProfile] = useState(false);
   const [isShowing, setIsShowing] = useState<boolean>(false);
   const isLogin = useUserStore((state: any) => state.isLogin, shallow);
@@ -51,10 +53,14 @@ const Header = () => {
                   </span>
                   <input
                     type="text"
-                    className="form-control fs-16"
-                    defaultValue="Search"
-                    aria-label="Kurtis"
+                    className="form-control fs-12"
+                    placeholder="Find clothing from over 500+ categories..."
+                    aria-label=""
                     aria-describedby="addon-wrapping"
+                    onClick={(event) => {
+                      event.preventDefault();
+                      setOpenSearchBox(true);
+                    }}
                   />
                   <button type="button" className="closebtn d-md-none">
                     <i className="fas fa-xmark fa-fw" />
@@ -223,6 +229,11 @@ const Header = () => {
             </div>
           </div>
         </div>
+        {/* Search Popup */}
+      <SearchPopup
+        openSearchBox={openSearchBox}
+        setOpenSearchBox={setOpenSearchBox}
+      />
       </header>
     </>
   );

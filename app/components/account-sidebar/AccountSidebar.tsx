@@ -49,7 +49,7 @@ const AccountSidebar = () => {
                             <span>Saved Addresses</span>
                         </a>
                     </li>
-                    <li className="font-m">
+                    {/* <li className="font-m">
                         <a  onClick={() => router.replace(Permalink.ofPayment())}>
                             <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none">
                                 <g clipPath="url(#clip0_3166_4138)">
@@ -60,7 +60,7 @@ const AccountSidebar = () => {
                             </svg>
                             <span>Payment Methods</span>
                         </a>
-                    </li>
+                    </li> */}
                     <li className="font-m" >
                         <a onClick={() => {
                             setIsShowing(true)

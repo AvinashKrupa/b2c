@@ -2,12 +2,15 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { Cart } from "../../../network/gateway/Cart";
+import { Wishlist } from "../../../network/gateway/Wishlist";
 import Permalink from "../../../utils/Permalink";
 import LocalStorageService from "../../../utils/storage/LocalStorageService";
 import useCartStore from "../../../zustand/cart";
+import useWishlistStore from "../../../zustand/wishlist";
 import Login from "../login";
 
 const ProductQuickView = (props: any) => {
+  console.log("this is product quick view",props)
 
   const route = useRouter();
   const [product, setProduct] = useState<any>(props?.data);
@@ -21,6 +24,7 @@ const ProductQuickView = (props: any) => {
   const cartItems = useCartStore((state: any) => state.cartItems);
   const [selectedImage, setSelectedImage] = useState(0);
   const [colorCode, setColorCode] = useState("#ffffff");
+  const wishItems = useWishlistStore((state: any) => state.wishlistItems);
   const router = useRouter();
   useEffect(() => {
     getSizes();
@@ -141,6 +145,44 @@ const ProductQuickView = (props: any) => {
       .addToCart(params)
       .then((info) => {
         console.log("info", info);
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
+  }
+
+  function deletwishlistItem(id: string) {
+    let entry_id
+    LocalStorageService.getWishlistIDEntry_ID().data?.map((each: any) => {
+      if (each.id === id) {
+        return entry_id = each.entry_id
+      }
+    })
+    Wishlist.getInstance()
+      .deleteWishListItem(entry_id, id)
+      .then((response: any) => {
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
+
+  }
+
+  function addToWishList(id: string) {
+    Wishlist.getInstance()
+      .createWishlistEntry()
+      .then((info) => {
+        console.log("info", info);
+      }).then(() => {
+        Wishlist.getInstance()
+          .addToWishList(id)
+          .then((info) => {
+            console.log("info", info);
+            localStorage.removeItem("WISHLIST_ENTRY")
+          })
+          .catch((error) => {
+            console.log("error", error);
+          });
       })
       .catch((error) => {
         console.log("error", error);
@@ -270,15 +312,26 @@ const ProductQuickView = (props: any) => {
                     </div>
 
                     <div className="speaker pe-5">
-                      <a href="#" className="d-block mb-5">
+
+                    {wishItems?.includes(props.data.id) ? <div className="product-block-1 mb-5">
+                              <button type="button" className="btn-heart mb-5" onClick={() => {deletwishlistItem(props.data.id) }}><i className=" far fa-heart fa-fw "></i></button>
+                            </div> : <a
+                              onClick={() => {
+                                addToWishList(props.data.id);
+                              }}
+                              className=" mb-5 d-block"
+                              tabIndex={0} >
+                              <img src="/images/wishlist-detail.png" />
+                            </a>}
+                      {/* <a href="#" className="d-block mb-5">
                         <img src="/images/wishlist-detail.png" />
-                      </a>
-                      <a href="#" className="d-block  mb-5">
+                      </a> */}
+                     {/*  <a href="#" className="d-block  mb-5">
                         <img src="/images/volume.png" />
                       </a>
                       <a href="#" className="d-block  mb-5">
                         <img src="/images/swap.png" />
-                      </a>
+                      </a> */}
                     </div>
                   </div>
                 </div>
@@ -368,7 +421,7 @@ const ProductQuickView = (props: any) => {
                               />
                               <label htmlFor="color-1">
                                 <span style={{ background: info.description }}>
-                                  
+
                                 </span>
                               </label>
                             </div>
@@ -461,7 +514,7 @@ const ProductQuickView = (props: any) => {
                         </label>
                       </div> */}
                     </div>
-                    <div className="list mt-4">
+                    {/* <div className="list mt-4">
                       <div className="row">
                         <div className="col-md-12 d-flex">
                           <ul className="p-0 me-5">
@@ -491,9 +544,9 @@ const ProductQuickView = (props: any) => {
                     </div>
                     <div className="hurryUp">
                       Hurry! Only <strong>24 Items</strong> Left in Stock
-                    </div>
+                    </div> */}
                     <div className="row">
-                      <div className="col-sm-6">
+                      {/* <div className="col-sm-6">
                         <div className="product-rating mt-0  text-center">
                           <span>4.7(21)</span>
                           <i className="fas fa-star"></i>
@@ -503,8 +556,8 @@ const ProductQuickView = (props: any) => {
                           <i className="fas fa-star-half-alt"></i>
                           <p className="fs-12 text-color-1">345 reviews</p>
                         </div>
-                      </div>
-                      <div className="col-sm-6  text-center">
+                      </div> */}
+                      <div className="col-sm-12  text-center">
                         <div className="product-price">
                           <p className="last-price mb-0 fs-12 font-r">
                             <span className="text-color-1">
@@ -534,11 +587,11 @@ const ProductQuickView = (props: any) => {
                         </div>
                       </div>
                     </div>
-                    <div className="resquest">
+                    {/* <div className="resquest">
                       <a href="#" className="font-m" title="">
                         Request Sample
                       </a>
-                    </div>
+                    </div> */}
                     <div className="purchase-info d-flex">
                       <button type="button" className="btn w-50" onClick={() => route.replace(Permalink.ofProduct(product))}>
                         More Info

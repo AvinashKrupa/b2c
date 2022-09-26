@@ -152,9 +152,9 @@ const ProductDetailScreen: NextPage = () => {
                             <h4 className="fs-16 font-sb">
                               {product?.getOffPercent()}% Discount
                             </h4>
-                            <p className="fs-13 font-r">22 : 38 : 18</p>
+                            <p className="fs-13 font-r">22:38:18</p>
                           </div>
-                          <div className="offtype mt-5">
+                         {/*  <div className="offtype mt-5">
                             <a href="#">
                               <img
                                 className="me-2 d-inline-block"
@@ -221,7 +221,7 @@ const ProductDetailScreen: NextPage = () => {
                                 Hand Wash
                               </p>
                             </li>
-                          </ul>
+                          </ul> */}
                         </div>
                         <div className="col-md-4">
                           <img
@@ -267,7 +267,7 @@ const ProductDetailScreen: NextPage = () => {
                                         <span
                                           style={{ background: item.description }}
                                         >
-                                          <div title={item.name} />
+                                          {/* <div title={item.name} /> */}
                                         </span>
                                       </label>
                                     </div>
@@ -311,7 +311,7 @@ const ProductDetailScreen: NextPage = () => {
                                     })}
                                 </div>
 
-                                <table className="table cart-table">
+                                {/* <table className="table cart-table">
 
                                   <tbody>
                                     {sizeValues.map(
@@ -407,9 +407,9 @@ const ProductDetailScreen: NextPage = () => {
                                     )}
                                   </tbody>
 
-                                </table>
+                                </table> */}
                               </div>
-                              <div className="text-center mb-4">
+                              {/* <div className="text-center mb-4">
                                 <button
                                   type="button"
                                   className="cartrow-btn"
@@ -418,9 +418,9 @@ const ProductDetailScreen: NextPage = () => {
                                   <i className="fas fa-plus fa-fw" /> Add Another
                                   Size
                                 </button>
-                              </div>
+                              </div> */}
                             </div>
-                            <a
+                           {/*  <a
                               href="#"
                               className="avail mt-4"
                               title="Add 20 more units in Size 36 to avail discounts"
@@ -437,7 +437,7 @@ const ProductDetailScreen: NextPage = () => {
                                 <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
                               </svg>
                               Add 20 more units in Size 36 to avail discounts
-                            </a>
+                            </a> */}
                           </div>
                         </div>
                       </div>
@@ -450,6 +450,9 @@ const ProductDetailScreen: NextPage = () => {
           }
         </div>
         <div className="m-bg position-relative">
+          <br/>
+          <br/>
+          <br/>
           <div className="wrapper">
             {
               product && (
@@ -463,7 +466,7 @@ const ProductDetailScreen: NextPage = () => {
                     >
                       <li className="nav-item" role="presentation">
                         <button
-                          className={`nav-link font-sb bg-1 ${selectedSection == 1 ? "active" : ""
+                          className={`nav-link font-sb bg-1 mt-3 ${selectedSection == 1 ? "active" : ""
                             }`}
                           id="home-tab"
                           data-bs-toggle="tab"
@@ -492,7 +495,7 @@ const ProductDetailScreen: NextPage = () => {
                           Description
                         </button>
                       </li>
-                      <li className="nav-item" role="presentation">
+                      {/* <li className="nav-item" role="presentation">
                         <button
                           className={`nav-link font-sb bg-2 second ${selectedSection == 2 ? "active" : ""
                             }`}
@@ -547,7 +550,7 @@ const ProductDetailScreen: NextPage = () => {
                           </svg>
                           Reviews
                         </button>
-                      </li>
+                      </li> */}
                     </ul>
                     <div className="tab-content" id="myTabContent">
                       <div
@@ -559,7 +562,7 @@ const ProductDetailScreen: NextPage = () => {
                       >
                         {product?.getDescription()}
                       </div>
-                      <div
+                      {/* <div
                         className={`tab-pane fade show ${selectedSection == 2 ? "active" : ""
                           }`}
                         id="profile"
@@ -1141,24 +1144,24 @@ const ProductDetailScreen: NextPage = () => {
                             </ul>
                           </div>
                         </div>
-                      </div>
+                      </div> */}
                     </div>
                   </section>
                   <section className="d-none d-lg-block">
                     <div className="row deliveryOption-row">
-                      <div className="col-md-4">
+                      {/* <div className="col-md-4">
                         <div className="deliveryOption position-relative text-center">
                           <img className="" src="/images/truck.png" alt="" />
                           <h4 className="mt-4">Get it by Wed, June 27</h4>
                         </div>
-                      </div>
-                      <div className="col-md-4">
+                      </div> */}
+                      <div className="col-md-6">
                         <div className="deliveryOption position-relative text-center">
                           <img className="" src="/images/cod.png" alt="" />
                           <h4 className="mt-4">Pay on Delivery Available</h4>
                         </div>
                       </div>
-                      <div className="col-md-4">
+                      <div className="col-md-6">
                         <div className="deliveryOption position-relative text-center">
                           <img className="" src="/images/return.png" alt="" />
                           <h4 className="mt-4">
@@ -1172,13 +1175,13 @@ const ProductDetailScreen: NextPage = () => {
               )
             }
             {/* Similar Products */}
-            <DetailSimilarProducts />
+            {/* <DetailSimilarProducts /> */}
             {/* End Similar Products */}
             {/* Upsell Cross sell */}
-            <DetailUpsellCrossSell />
+            {/* <DetailUpsellCrossSell /> */}
             {/* End Upsell Cross sell */}
             {/* Recently Viewed */}
-            <DetailRecentlyViewed />
+            {/* <DetailRecentlyViewed /> */}
             {/* End Recently Viewed */}
           </div>
           <Footer />
@@ -1195,14 +1198,14 @@ const ProductDetailScreen: NextPage = () => {
                         ₹{product?.getOffAmount()} off ({product?.getOffPercent()}
                         %)
                       </span>
-                      <span className="mx-3">or</span>
+                      {/* <span className="mx-3">or</span>
                       <span className="fs-13">
                         ₹3,399 +<img src="/images/coins.png" alt="" /> 51
-                      </span>
+                      </span> */}
                     </div>
-                    <h5 className="fs-10 text-color-7 mt-2">
+                    {/* <h5 className="fs-10 text-color-7 mt-2">
                       {product?.getStockLine()}
-                    </h5>
+                    </h5> */}
                   </li>
                   <li className="list-inline-item offset-lg-2 mt-3 mt-lg-0 text-center text-lg-start">
                     <a className="product-block">
@@ -1224,17 +1227,19 @@ const ProductDetailScreen: NextPage = () => {
                         />
                       </button>
                     </a>
-                    <a
+                    {/* <a
                       href="#"
                       className="btn-border fs-20 me-2 d-none d-lg-inline-block"
                     >
-                      Request Semple
-                    </a>
+                      Request Sample
+                    </a> */}
+                    
                     <a href="#" className="btn-border fs-20 me-2 d-lg-none">
                       Wishlist
                     </a>
                     <a
                       className="btn fs-20"
+                      style={{marginLeft: "200px"}}
                       onClick={() => {
                         if (Cart.isProductInCart(product.getId())) {
                           router.replace(Permalink.ofCart());

@@ -3,7 +3,7 @@ import React from "react";
 const FooterDetail = () => {
     return (
         <div className="col-md-12 mt-5">
-            <div className="footer-detail mb-5">
+            {/* <div className="footer-detail mb-5">
                 <h6>ONLINE SHOPPING MADE EASY AT MYNTRA</h6>
                 <p>
                 If you would like to experience the best of online shopping
@@ -287,7 +287,7 @@ const FooterDetail = () => {
                 friends, family and loved-ones and avail our gift services
                 for special occasions.
                 </p>
-            </div>
+            </div> */}
             <div className="copyright text-center">
                 © 2022 www.navtatva.com. All rights reserved.
             </div>

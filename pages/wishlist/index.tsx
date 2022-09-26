@@ -71,7 +71,7 @@ const WishlistScreen: NextPage = () => {
                     <section className="productBar mt-4 mt-md-5">
                         <ul className="breadcrumb">
                             <li className="fs-40 font-b text-color-2 list-inline-item"><a className="text-color-1" href="#">My Collections</a></li>
-                            <li className="fs-40 font-b text-color-2 list-inline-item"><svg xmlns="http://www.w3.org/2000/svg" width={30} height={30} fill="currentColor" className="bi bi-chevron-right" viewBox="0 0 16 16">
+                            {/* <li className="fs-40 font-b text-color-2 list-inline-item"><svg xmlns="http://www.w3.org/2000/svg" width={30} height={30} fill="currentColor" className="bi bi-chevron-right" viewBox="0 0 16 16">
                                 <path fillRule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
                             </svg></li>
                             <li className="fs-40 font-b text-color-2 list-inline-item"><span className="text-color-3">Kurtis</span></li>
@@ -80,7 +80,7 @@ const WishlistScreen: NextPage = () => {
                                     <path fillRule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
                                 </svg>
                                 Create Bundle
-                            </a></li>
+                            </a></li> */}
                         </ul>
 
                         <div className="mt-4 mt-lg-5 mb-5">

@@ -19,7 +19,7 @@ const OrderHistoryItems = () => {
         } else {
             setLoginPopup(true);
         }
-
+        return () => { };
     }, [isLogin]);
 
     function getCustomerOrders() {
@@ -101,7 +101,7 @@ const OrderHistoryItems = () => {
                                 </li>
                             </ul>
                             <div className="order-items-btn text-center col-lg-11" >
-                                <div className="col-lg-3  m-2">
+                                {/* <div className="col-lg-3  m-2">
                                     <a className="btn-new btn-bor d-block mb-2 mt-2 mt-xl-0 fs-11" style={(item?.status === 'cancelled') ? { pointerEvents: 'none', backgroundColor: '#B8B8B8' } : {}}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} fill="currentColor" className="bi bi-geo-alt" viewBox="0 0 16 16" style={{ marginRight: 5 }}>
                                             <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z" />
@@ -110,7 +110,7 @@ const OrderHistoryItems = () => {
                                         Track Package
                                     </a>
 
-                                </div>
+                                </div> */}
                                 <div className=" col-lg-3 m-2">
                                     {item.status === 'cancelled' ? <><a className="btn-can d-block mb-2" style={(item?.status === 'cancelled') ? { pointerEvents: 'none', } : {}}>
                                         <svg style={{ marginRight: 5 }} xmlns="http://www.w3.org/2000/svg" width={20} height={20} fill="currentColor" className="bi bi-x-lg" viewBox="0 0 16 16">
@@ -127,7 +127,7 @@ const OrderHistoryItems = () => {
                                         </a>}
 
                                 </div>
-                                <div className=" col-lg-3 m-2">
+                                {/* <div className=" col-lg-3 m-2">
                                     <a href="#" className="btn-new btn-bor d-block mb-2" style={(item?.status === 'cancelled') ? { pointerEvents: 'none', backgroundColor: '#B8B8B8' } : {}}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} fill="currentColor" className="bi bi-pencil" viewBox="0 0 16 16" style={{ marginRight: 5 }}>
                                             <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
@@ -135,7 +135,7 @@ const OrderHistoryItems = () => {
                                         Leave Feedback
                                     </a>
 
-                                </div>
+                                </div> */}
                                 <div className="col-lg-3  m-2">
                                     <a href="#" className="btn-new btn-bor d-block text-center" style={(item?.status === 'cancelled') ? { pointerEvents: 'none', backgroundColor: '#B8B8B8' } : {}}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} fill="currentColor" className="bi bi-file-text" viewBox="0 0 16 16" style={{ marginRight: 5 }}>

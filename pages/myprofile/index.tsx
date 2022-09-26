@@ -57,7 +57,7 @@ const OrderHistoryScreen: NextPage = () => {
                           {customerData?.data.userDetails.name}
                         </b>
                       </h3>
-                      <div className="varification-box text-white">
+                      {/* <div className="varification-box text-white">
                         <h5 className="mb-2">Pending e-mail Verification</h5>
                         <p>
                           Complete e-mail verification within the next 24 hours
@@ -90,12 +90,15 @@ const OrderHistoryScreen: NextPage = () => {
                             </g>
                           </svg>
                         </a>
-                      </div>
+                      </div> */}
+                      <br/>
+                      <br/>
+                      <br/>
                       <form className="user-form">
                         <div className="row">
                           <div className="col-12 col-lg-10 col-xl-7">
                             <div className="row">
-                              <div className="col-12 col-sm-6">
+                              <div className="col-12 col-sm-4">
                                 <div className="form-group">
                                   <label>Name</label>
                                   <input
@@ -106,7 +109,7 @@ const OrderHistoryScreen: NextPage = () => {
                                   />
                                 </div>
                               </div>
-                              <div className="col-12 col-sm-6">
+                              {/* <div className="col-12 col-sm-6">
                                 <div className="form-group">
                                   <label>Password</label>
                                   <input
@@ -115,8 +118,8 @@ const OrderHistoryScreen: NextPage = () => {
                                     placeholder="**********"
                                   />
                                 </div>
-                              </div>
-                              <div className="col-12 col-sm-6">
+                              </div> */}
+                              <div className="col-12 col-sm-4">
                                 <div className="form-group">
                                   <label>E-mail</label>
                                   <input
@@ -127,7 +130,7 @@ const OrderHistoryScreen: NextPage = () => {
                                   />
                                 </div>
                               </div>
-                              <div className="col-12 col-sm-6">
+                              {/* <div className="col-12 col-sm-6">
                                 <div className="form-group">
                                   <label>Two Factor Authentication</label>
                                   <input
@@ -136,8 +139,8 @@ const OrderHistoryScreen: NextPage = () => {
                                     placeholder="Enabled"
                                   />
                                 </div>
-                              </div>
-                              <div className="col-12 col-sm-6 mb-5">
+                              </div> */}
+                              <div className="col-12 col-sm-4">
                                 <div className="form-group">
                                   <label>Mobile Number</label>
                                   <input

@@ -6,7 +6,7 @@ const VisitNunchiBanner = () => {
         //     <a href="#"><img className="w-100" src="images/advertise.png" alt="" /></a>
         // </section>
 
-        <section className="mt-5 jwellarySec">
+        <section className="mt-5 jwellarySec mt-5 mb-5">
         <div className="row">
           <div className="col-xl-5 mb-4 mb-xl-0 align-self-center">
             <div className="leftBar text-center text-xl-start">

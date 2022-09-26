@@ -7,12 +7,14 @@ import "react-loading-skeleton/dist/skeleton.css";
 import Permalink from "../../../utils/Permalink";
 import useWishlistStore from "../../../zustand/wishlist";
 import { Wishlist } from "../../../network/gateway/Wishlist";
+import Toast from "../../../utils/Toast";
 
 const CartItem = (props: any) => {
   const setLoginPopup = useUserStore((state: any) => state.showLogin);
   const [login, setLogin] = useState<boolean>(false);
   const wishItems = useWishlistStore((state: any) => state.wishlistItems);
-  console.log("prop id", props.id);
+  const [aaa,setAAA]=useState(props)
+
   function getColor() {
     console.log("props.meta", wishItems);
     let data = props.meta?.variant.filter((info: any) => {
@@ -56,18 +58,50 @@ const CartItem = (props: any) => {
 
   }
 
+  function handleChange(e:any,id:string){
+    e.preventDefault();
+
+    if( e.target.valueAsNumber ===0 || e.target.valueAsNumber >1000){
+      Toast.showError("Please enter quantity 1-1000*.");
+    }
+    else{
+      const params = {
+        data: {
+          id: id,
+          type: "custom_item",
+          quantity: e.target.valueAsNumber
+        },
+      };
+      if(e.target.valueAsNumber >0){
+      Cart.getInstance()
+        .updateCartQuantity(id,params)
+        .then((info: any) => {
+          console.log("upade cart quantity", info);
+          props.getCustomerCart()
+        })
+        .catch((error) => {
+          console.log("error", error);
+        });
+
+      }
+    }
+
+
+  }
+
+
   return (
     <>
       <div className="bgbar position-relative mt-4">
         <div className="row">
-          <div className="form-check">
+          {/* <div className="form-check">
             <input
               className="form-check-input"
               type="checkbox"
               defaultValue={""}
               id="flexCheckDefault"
             />
-          </div>
+          </div> */}
           <div className="col-md-3 col-lg-3">
             <div className="imgbar ">
               <a href={Permalink.ofProduct(props)}>
@@ -79,7 +113,7 @@ const CartItem = (props: any) => {
             <a href={Permalink.ofProduct(props)}>
               <h3 className="fs-16 font-sb text-color-2">{props.name}</h3>
             </a>
-            <p className="fs-14 font-r text-color-1 pt-1 prodes">
+            <p className="fs-14 font-r text-color-1 pt-1 prodes" style={{width:380}}>
               {props.description}
             </p>
             <div className="d-flex py-3">
@@ -111,22 +145,25 @@ const CartItem = (props: any) => {
                 <div className="product-price">
                   <p>
                     <span className="new-price mb-0 font-sb">
-                      <span>
+                      {/* <span>
                         ₹{props?.discountPrice?.currencies.INR.amount}{" "}
+                      </span> */}
+                        <span>
+                        ₹{props?.value.amount}{" "}
                       </span>
                     </span>
-                    <span className="last-price mb-0 fs-12 font-r">
+                    {/* <span className="last-price mb-0 fs-12 font-r">
                       <span className="text-color-1">
                         ₹{props?.originalPrice?.currencies.INR.amount}
                       </span>
-                    </span>
+                    </span> */}
                   </p>
 
-                  <p className="save fs-10 font-r">
+                  {/* <p className="save fs-10 font-r">
                     You save ₹
                     {props?.originalPrice?.currencies.INR.amount -
                       (props?.discountPrice?.currencies.INR.amount || 0)}
-                  </p>
+                  </p> */}
                 </div>
               </div>
               <div className="quantity d-flex px-4" style={{ maxHeight: 30 }}>
@@ -136,17 +173,27 @@ const CartItem = (props: any) => {
                 >
                   Qty
                 </label>
-                <select
+                {/* <select
                   style={{ width: 30, marginLeft: 4 }}
                   className="form-select fs-14 font-r"
                   aria-label="Default select example"
+               onClick={(e:any)=>{
+                console.log("this is called...!",e.target.value)
+               }}
+
                 >
                   <option value={1}>
                     <b>{props.quantity}</b>
                   </option>
-                  {/* <option value={2}>2</option>
-                <option value={3}>3</option> */}
-                </select>
+                  <option value={2}>
+                    <b>2</b>
+                  </option>
+                  <option value={3}>
+                    <b>3</b>
+                  </option>
+
+                </select> */}
+                <input className="quantity" type="number" defaultValue={props.quantity}  min="1" max="1000" onChange={(e)=>{handleChange(e,props.id)}}  style={{width:90}} />
               </div>
             </div>
             <div className="discount-offer text-white">

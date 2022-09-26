@@ -34,8 +34,8 @@ const SearchBlock = (props: any) => {
                     </span>
                     <input
                         type="text"
-                        className="form-control fs-16"
-                        placeholder="Kurtis"
+                        className="form-control fs-12"
+                        placeholder="Search"
                         aria-label="Kurtis"
                         aria-describedby="addon-wrapping"
                         value={searchText ?? ""}
@@ -48,12 +48,12 @@ const SearchBlock = (props: any) => {
                     />
                 </div>
                 {
-                    searchText && 
+                    searchText &&
                     <div className="result textlight">
                         Search results for <span>‘{searchText}’</span>
                     </div>
-                }                
-            </div>        
+                }
+            </div>
         </>
     )
 }
