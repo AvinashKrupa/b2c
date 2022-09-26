@@ -14,6 +14,7 @@ const Logout = (props: any) => {
     props.setIsShowing(false);
     isRemoveUserInfo(false);
     useCartStore.setState({ count: false, cartItems: [] });
+    localStorage.clear();
     router.replace(Permalink.ofHomePage())
   };
   return (
