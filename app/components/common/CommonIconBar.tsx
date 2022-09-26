@@ -9,8 +9,7 @@ import WishlistButton from "../elements/wishlistButton";
 import { AvatarGenerator } from 'random-avatar-generator';
 
 const CommonIconBar = () => {
-    const router = useRouter();
-    const generator = new AvatarGenerator();
+    const router = useRouter(); 
 
     const [avatar, setAvatar] = useState<string>("");
     const [openTap, setOpenTap] = useState<boolean>(true);
@@ -26,9 +25,16 @@ const CommonIconBar = () => {
             setLoginPopup(true);
         }
     }
-    useEffect(() => {        
-
-        setAvatar(generator.generateRandomAvatar());
+    useEffect(() => {
+        let oldAvatar = localStorage.getItem("avatar");
+        if(oldAvatar){
+            setAvatar(oldAvatar);
+        }else{
+            const generator = new AvatarGenerator();
+            let newAvatar = generator.generateRandomAvatar();
+            setAvatar(newAvatar);
+            localStorage.setItem("avatar",newAvatar);
+        }
         return () => {}
      }, []);
 
