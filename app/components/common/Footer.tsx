@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="wrapper">
         <div className="row">
           <div className="col-md-12 col-lg-4">
-            <div className="footer-area">
+            {/* <div className="footer-area">
               <h2>Newsletter</h2>
               <p>
                 Get every product update and new offers as soon as they are
@@ -28,18 +28,7 @@ const Footer = () => {
                   Confirm identity
                 </button>
               </form>
-            </div>
-          </div>
-          <div className="col-md-6 col-lg-3 offset-md-0 offset-lg-1 mt-4 mt-lg-0">
-            <div className="footer-area mb-5">
-              <h2>Contact Us</h2>
-              <p>
-                <a href="mailto:support@navtatva.com">support@navtatva.com</a>
-              </p>
-              <p>
-                <a href="tel:73892 73884">+91 73892 73884</a>
-              </p>
-            </div>
+            </div> */}
             <div className="footer-area">
               <h2>Location</h2>
               <p>
@@ -48,6 +37,17 @@ const Footer = () => {
                 10 Bengaluru 560056
               </p>
             </div>
+          </div>
+          <div className="col-md-6 col-lg-4 offset-md-0 mt-4 mt-lg-0">
+            <div className="footer-area mb-5">
+              <h2>Contact Us</h2>
+              <p>
+                <a href="mailto:support@navtatva.com">support@navtatva.com</a>
+              </p>
+              <p>
+                <a href="tel:73892 73884">+91 73892 73884</a>
+              </p>
+            </div>            
           </div>
           <div className="col-md-6 col-lg-4  mt-4 mt-lg-0">
             <div className="footer-area">

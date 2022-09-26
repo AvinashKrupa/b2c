@@ -164,3 +164,17 @@ li.page-item.disabled {
   background: #eb1354;
   color: #fff;
 }
+.btn-danger {
+  color: #fff!important;
+  background-color: #dc3545!important;
+  border-color: #dc3545!important;
+}
+.chooseyourapparel .main-header .input-group{
+  width: 45%;;
+}
+ul.iconBar li a.user {
+  background: rgba(249, 188, 96, 0.4);
+}
+.subcategory {
+  min-height: 700px;
+}

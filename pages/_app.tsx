@@ -44,7 +44,10 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <NextNProgress />      
+      <NextNProgress 
+        color="#29D"
+        options={{ showSpinner: false }}
+      />      
       <Head>
         <title>NavTatva</title>
         <meta charSet="utf-8" />

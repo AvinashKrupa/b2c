@@ -6,9 +6,13 @@ import useUserStore from "../../../zustand/store";
 import shallow from "zustand/shallow";
 import Logout from "../logout";
 import WishlistButton from "../elements/wishlistButton";
+import { AvatarGenerator } from 'random-avatar-generator';
+
 const CommonIconBar = () => {
     const router = useRouter();
+    const generator = new AvatarGenerator();
 
+    const [avatar, setAvatar] = useState<string>("");
     const [openTap, setOpenTap] = useState<boolean>(true);
     const [showProfile, setShowProfile] = useState<boolean>(false);
     const [isShowing, setIsShowing] = useState<boolean>(false);
@@ -22,7 +26,11 @@ const CommonIconBar = () => {
             setLoginPopup(true);
         }
     }
-    useEffect(() => { }, [isLogin]);
+    useEffect(() => {        
+
+        setAvatar(generator.generateRandomAvatar());
+        return () => {}
+     }, []);
 
     return (
         <>
@@ -83,10 +91,11 @@ const CommonIconBar = () => {
                                 }
                             }}
                         >
+                            
                             <img
                                 width={32}
                                 height={32}
-                                src="/images/user.png"
+                                src={avatar}
                                 alt=""
                             />
                         </a>

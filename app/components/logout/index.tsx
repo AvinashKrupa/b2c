@@ -17,7 +17,7 @@ const Logout = (props: any) => {
     router.replace(Permalink.ofHomePage())
   };
   return (
-    <Modal show={props.isShowing} animation={false} size={"sm"} id="checkOut">
+    <Modal show={props.isShowing} animation={false} size={"m"} id="checkOut">
       <button
         type="button"
         className="btn-close"
@@ -45,6 +45,9 @@ const Logout = (props: any) => {
       </div>
       <div className="modal-body"> Are you sure you want to logout?</div>
       <div className="modal-footer">
+        <a className="btn btn-danger fs-13 p-2" onClick={()=> (props.setIsShowing(false))}>
+          No
+        </a>
         <a className="btn fs-13 p-2" onClick={logout}>
           Yes
         </a>

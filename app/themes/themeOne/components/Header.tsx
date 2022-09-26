@@ -34,8 +34,8 @@ const Header = () => {
         <div className="row">
           <div className="col-3 col-lg-1 align-self-center">
             <a onClick={() => router.replace(Permalink.ofHomePage())}>
-              <Image
-                src={LogoImg}
+              <img
+                src="/images/logo.png"
                 alt="logo"
                 className="img-fluid desk-logo"
                 width={88}
@@ -85,8 +85,8 @@ const Header = () => {
               <input
                 type="text"
                 className="form-control fs-12"
-                placeholder="Search"
-                aria-label="Kurtis"
+                placeholder="Find clothing from over 500+ categories..."
+                aria-label=""
                 aria-describedby="addon-wrapping"
                 onClick={(event) => {
                   event.preventDefault();
