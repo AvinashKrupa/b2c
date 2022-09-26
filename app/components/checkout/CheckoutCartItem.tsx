@@ -68,6 +68,7 @@ const removeCartitem = (id: any) => {
           .then((info: any) => {
             console.log("upade cart quantity", info);
             //props.getCustomerCart()
+            props.setCartItems(info.data.data);
           })
           .catch((error) => {
             console.log("error", error);

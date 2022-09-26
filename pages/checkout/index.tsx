@@ -321,6 +321,7 @@ const CheckoutScreen: NextPage = (props: any) => {
                   removeCart={removeCart}
                   grandTotal={grandTotal}
                   getCustomerCart={getCustomerCart}
+                  setCartItems={setCartItems}
                 />
                 {/* <PromoCode /> */}
               </div>

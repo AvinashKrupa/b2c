@@ -105,7 +105,7 @@ const CartScreen: NextPage = () => {
               {cartItems?.length != 0 &&
                 cartItems?.map((item: any, index: number) => {
                   return (
-                    <CartItem key={index} {...item} removeCart={removeCart} getCustomerCart={getCustomerCart}/>
+                    <CartItem key={index} {...item} removeCart={removeCart} getCustomerCart={getCustomerCart} />
                   );
                 })}
               {!loading && cartItems?.length == 0 && (
