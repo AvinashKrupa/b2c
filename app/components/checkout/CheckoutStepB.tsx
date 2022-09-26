@@ -148,7 +148,7 @@ const CheckoutStepB = (props: any) => {
                   />
                 </div>
               </div>
-              <div className="mt-4">
+              {/* <div className="mt-4">
                 <label htmlFor="zip" className="form-label">
                   Address type*
                 </label>
@@ -186,7 +186,7 @@ const CheckoutStepB = (props: any) => {
                     </label>
                   </div>
                 </div>
-              </div>
+              </div> */}
               <div className="mt-4">
                 <button
                   className="btn  btn-lg fs-16"
@@ -209,7 +209,7 @@ const CheckoutStepB = (props: any) => {
               {/* <div className="seprtor">
                 <span>or</span>
               </div> */}
-              <div className="mt-5">
+              {/* <div className="mt-5">
                 <div className="form-check  mt-4">
                   <input
                     id="delivery"
@@ -224,7 +224,7 @@ const CheckoutStepB = (props: any) => {
                     In-store delivery
                   </label>
                 </div>
-              </div>
+              </div> */}
             </form>
           </div>
         </div>

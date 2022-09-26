@@ -96,9 +96,9 @@ const ThankYou: NextPage = () => {
         console.log("This customer data", data)
 
         data?.data?.data.map((each: any) => {
-          if (each.id === merchantPaymentRefId) {
+          if (each?.id === merchantPaymentRefId) {
             setOrderItem(each)
-            console.log("this is each",each)
+
           }
         })
 
