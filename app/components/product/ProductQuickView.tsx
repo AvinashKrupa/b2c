@@ -2,12 +2,15 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { Cart } from "../../../network/gateway/Cart";
+import { Wishlist } from "../../../network/gateway/Wishlist";
 import Permalink from "../../../utils/Permalink";
 import LocalStorageService from "../../../utils/storage/LocalStorageService";
 import useCartStore from "../../../zustand/cart";
+import useWishlistStore from "../../../zustand/wishlist";
 import Login from "../login";
 
 const ProductQuickView = (props: any) => {
+  console.log("this is product quick view",props)
 
   const route = useRouter();
   const [product, setProduct] = useState<any>(props?.data);
@@ -21,6 +24,7 @@ const ProductQuickView = (props: any) => {
   const cartItems = useCartStore((state: any) => state.cartItems);
   const [selectedImage, setSelectedImage] = useState(0);
   const [colorCode, setColorCode] = useState("#ffffff");
+  const wishItems = useWishlistStore((state: any) => state.wishlistItems);
   const router = useRouter();
   useEffect(() => {
     getSizes();
@@ -141,6 +145,44 @@ const ProductQuickView = (props: any) => {
       .addToCart(params)
       .then((info) => {
         console.log("info", info);
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
+  }
+
+  function deletwishlistItem(id: string) {
+    let entry_id
+    LocalStorageService.getWishlistIDEntry_ID().data?.map((each: any) => {
+      if (each.id === id) {
+        return entry_id = each.entry_id
+      }
+    })
+    Wishlist.getInstance()
+      .deleteWishListItem(entry_id, id)
+      .then((response: any) => {
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
+
+  }
+
+  function addToWishList(id: string) {
+    Wishlist.getInstance()
+      .createWishlistEntry()
+      .then((info) => {
+        console.log("info", info);
+      }).then(() => {
+        Wishlist.getInstance()
+          .addToWishList(id)
+          .then((info) => {
+            console.log("info", info);
+            localStorage.removeItem("WISHLIST_ENTRY")
+          })
+          .catch((error) => {
+            console.log("error", error);
+          });
       })
       .catch((error) => {
         console.log("error", error);
@@ -270,9 +312,20 @@ const ProductQuickView = (props: any) => {
                     </div>
 
                     <div className="speaker pe-5">
-                      <a href="#" className="d-block mb-5">
+
+                    {wishItems?.includes(props.data.id) ? <div className="product-block-1 mb-5">
+                              <button type="button" className="btn-heart mb-5" onClick={() => {deletwishlistItem(props.data.id) }}><i className=" far fa-heart fa-fw "></i></button>
+                            </div> : <a
+                              onClick={() => {
+                                addToWishList(props.data.id);
+                              }}
+                              className=" mb-5 d-block"
+                              tabIndex={0} >
+                              <img src="/images/wishlist-detail.png" />
+                            </a>}
+                      {/* <a href="#" className="d-block mb-5">
                         <img src="/images/wishlist-detail.png" />
-                      </a>
+                      </a> */}
                      {/*  <a href="#" className="d-block  mb-5">
                         <img src="/images/volume.png" />
                       </a>
@@ -368,7 +421,7 @@ const ProductQuickView = (props: any) => {
                               />
                               <label htmlFor="color-1">
                                 <span style={{ background: info.description }}>
-                                  
+
                                 </span>
                               </label>
                             </div>
