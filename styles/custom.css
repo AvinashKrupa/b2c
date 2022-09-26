@@ -178,3 +178,6 @@ ul.iconBar li a.user {
 .subcategory {
   min-height: 700px;
 }
+input.quantity {
+  text-align: center;
+}

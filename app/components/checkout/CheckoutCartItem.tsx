@@ -152,7 +152,7 @@ const removeCartitem = (id: any) => {
               return ItemLoop(item);
             })}
 
-          <ul>
+          {/* <ul>
             <li className="fs-14 font-r text-color-1 d-flex mb-3">
               Delivery Charges (express)
               <small className="text-color-2 text-end ms-auto">+ 100</small>
@@ -166,7 +166,7 @@ const removeCartitem = (id: any) => {
               <small className="text-end ms-auto  green"></small>
             </li>
           </ul>
-          <hr />
+          <hr /> */}
           <ul>
             <li className="fs-19 font-sb text-color-2 d-flex mb-3">
               Grand Total:{" "}
