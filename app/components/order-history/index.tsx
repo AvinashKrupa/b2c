@@ -19,7 +19,7 @@ const OrderHistoryItems = () => {
         } else {
             setLoginPopup(true);
         }
-
+        return () => { };
     }, [isLogin]);
 
     function getCustomerOrders() {

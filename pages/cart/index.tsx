@@ -90,7 +90,7 @@ const CartScreen: NextPage = () => {
         {/* Header */}
         <Header />
         {/* End Header */}
-        <section className="cartItem mt-4 mt-md-5">
+        <section className="cartItem mt-4 mt-md-5 mb-5">
           {cartItems?.length != 0 && (
             <h1 className="fs-40 font-b text-color-2 list-inline-item">
               Your Shopping Bag
@@ -105,7 +105,7 @@ const CartScreen: NextPage = () => {
               {cartItems?.length != 0 &&
                 cartItems?.map((item: any, index: number) => {
                   return (
-                    <CartItem key={index} {...item} removeCart={removeCart} />
+                    <CartItem key={index} {...item} removeCart={removeCart} getCustomerCart={getCustomerCart} />
                   );
                 })}
               {!loading && cartItems?.length == 0 && (
@@ -201,7 +201,7 @@ const CartScreen: NextPage = () => {
             )}
           </div>
         </section>
-        <VisitNunchiBanner />
+        {/* <VisitNunchiBanner /> */}
         {/* <section className="mt-4 mt-md-5 pb-5">
           <div className="row">
             <div className="col-md-12">

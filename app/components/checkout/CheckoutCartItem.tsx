@@ -1,6 +1,8 @@
 import { TbCurrencyRupee } from "react-icons/tb";
+import { Cart } from "../../../network/gateway/Cart";
 import { Wishlist } from "../../../network/gateway/Wishlist";
 import Permalink from "../../../utils/Permalink";
+import Toast from "../../../utils/Toast";
 
 const CheckoutCartItem = (props: any) => {
   function getSize() {
@@ -46,6 +48,38 @@ const removeCartitem = (id: any) => {
   }
 
   function ItemLoop(item: any) {
+    function handleChange(e:any,id:string){
+      e.preventDefault();
+
+      if( e.target.valueAsNumber ===0 || e.target.valueAsNumber >1000){
+        Toast.showError("Please enter quantity 1-1000*.");
+      }
+      else{
+        const params = {
+          data: {
+            id: id,
+            type: "custom_item",
+            quantity: e.target.valueAsNumber
+          },
+        };
+        if(e.target.valueAsNumber >0){
+        Cart.getInstance()
+          .updateCartQuantity(id,params)
+          .then((info: any) => {
+            console.log("upade cart quantity", info);
+            //props.getCustomerCart()
+            props.setCartItems(info.data.data);
+          })
+          .catch((error) => {
+            console.log("error", error);
+          });
+
+        }
+      }
+
+
+    }
+
     return (
       <div className="row">
         <div className="col-md-3 col-lg-4">
@@ -72,13 +106,14 @@ const removeCartitem = (id: any) => {
             </p>
             <div className="d-flex topBarAlign position-static ms-2">
               <div className="quantity d-flex px-2 ">
-                <label className="fs-14 font-r text-color-1 pt-1">Qty</label>
+                {/* <label className="fs-14 font-r text-color-1 pt-1">Qty</label>
                 <select
                   className="form-select fs-14 font-r"
                   aria-label="Default select example"
                 >
                   <option value={1}>{item.quantity}</option>
-                </select>
+                </select> */}
+                <input className="quantity" type="number" defaultValue={item.quantity}  min="1" max="1000" onChange={(e)=>{handleChange(e,item.id)}}  style={{width:90}} />
               </div>
             </div>
           </div>
@@ -94,7 +129,7 @@ const removeCartitem = (id: any) => {
               Move to Wishlist
             </a>
             <a
-              href="#"
+
               className="fs-14 font-sb text-color-3 ms-4"
               onClick={() => {
                 removeCartitem(item.id);
