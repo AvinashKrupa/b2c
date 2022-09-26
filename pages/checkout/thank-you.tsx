@@ -5,6 +5,9 @@ import { RupifiUCService } from "../../network/gateway/RupifiUCService";
 import LocalStorageService from "../../utils/storage/LocalStorageService";
 import VisitNunchiBanner from "../../app/components/common/VisitNunchiBanner";
 import { NextPage } from "next";
+import { CustomerOrderService } from "../../network/gateway/CustomerOrderService";
+import useUserStore from "../../zustand/store";
+import shallow from "zustand/shallow";
 
 interface iProps { }
 const ThankYou: NextPage = () => {
@@ -14,7 +17,11 @@ const ThankYou: NextPage = () => {
   const [rupifiResponse, setRupifiResponse] = useState<any>({});
   const [startDate,] = useState(new Date());
   const [deliveryDate, setDeliveyDate] = useState(new Date());
-  const [orderItems,setOrderItem]=useState([1,2])
+  const [orderItems, setOrderItem] = useState<any>()
+
+
+  const isLogin = useUserStore((state: any) => state.isLogin, shallow);
+  const setLoginPopup = useUserStore((state: any) => state.showLogin);
   const months = [
     "January",
     "February",
@@ -73,6 +80,58 @@ const ThankYou: NextPage = () => {
     Cart.regenrateCustomerCartAssociation();
     return () => { };
   }, []);
+
+  useEffect(() => {
+    if (merchantPaymentRefId) {
+      getCustomerOrders();
+    }
+
+    return () => { };
+  }, []);
+
+  function getCustomerOrders() {
+    CustomerOrderService.getInstance()
+      .getCustomerOrder()
+      .then((data: any) => {
+        console.log("This customer data", data)
+
+        data?.data?.data.map((each: any) => {
+          if (each.id === merchantPaymentRefId) {
+            setOrderItem(each)
+            console.log("this is each",each)
+          }
+        })
+
+      }).catch((error) => { });
+  }
+
+  function getSize(each: any) {
+    let data = each.meta?.variant.filter((info: any) => {
+      return info.name == "Size";
+    });
+    if (data && data.length > 0) return data[0].options?.name;
+  }
+
+  function getColor(each: any) {
+    let data = each.meta?.variant.filter((info: any) => {
+      return info.name == "Color";
+    });
+    if (data && data.length > 0) return data[0].options?.name;
+  }
+  function cancelOrder(id: string) {
+    const param = {
+      "status": "cancelled"
+    }
+
+    CustomerOrderService.getInstance()
+      .cancelOrder(id, param)
+      .then((data: any) => {
+
+      }).catch((error) => { });
+
+
+  }
+
 
   return (
     <div>
@@ -156,24 +215,24 @@ const ThankYou: NextPage = () => {
               </li> */}
             </ul>
             <a
-                  href="/"
-                  className=" fs-16 b-t-h btn bg-white border font-sb text-color-3 text-center w-30 mt-4"
-                >
-                  Back to Home Page{" "}
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width={22}
-                    height={22}
-                    fill="currentColor"
-                    className="bi bi-arrow-up-right"
-                    viewBox="0 0 16 16"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M14 2.5a.5.5 0 0 0-.5-.5h-6a.5.5 0 0 0 0 1h4.793L2.146 13.146a.5.5 0 0 0 .708.708L13 3.707V8.5a.5.5 0 0 0 1 0v-6z"
-                    />
-                  </svg>
-                </a>
+              href="/"
+              className=" fs-16 b-t-h btn  border font-sb  text-center w-30 mt-4" style={{color:"white"}}
+            >
+              Back to home page{" "}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width={22}
+                height={22}
+                fill="currentColor"
+                className="bi bi-arrow-up-right"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M14 2.5a.5.5 0 0 0-.5-.5h-6a.5.5 0 0 0 0 1h4.793L2.146 13.146a.5.5 0 0 0 .708.708L13 3.707V8.5a.5.5 0 0 0 1 0v-6z"
+                />
+              </svg>
+            </a>
           </div>
         </div>
         <div className="row cartItem m-3">
@@ -183,22 +242,35 @@ const ThankYou: NextPage = () => {
             </h4>
             <div className=" text-start">
 
-            {orderItems?.length != 0 &&
-       orderItems?.map((item: any, index: number) => {
-              return ( <div className="bgbar position-relative mt-4 ms-0" key={index}>
-              <div className="row">
-                <div className="col-md-3 col-lg-3">
-                  <div className="imgbar ">
-                    <img className="w-100" src="/images/img1.png" alt="" />
-                  </div>
-                </div>
-                <div className="col-md-9 position-relative">
-                  <h3 className="fs-16 font-sb text-color-2">Anubhutee</h3>
-                  <p className="fs-14 font-r text-color-1 pt-1 prodes">
-                    Women Teal Blue &amp; Beige Ethnic Motifs Printed Straight
-                    Kurti
-                  </p>
-                  <div className="d-flex pt-3">
+              {
+                orderItems?.line_items.map((item: any, index: number) => {
+                  return (<div className="bgbar position-relative mt-4 ms-0" key={index}>
+                    <div className="row">
+                      <div className="col-md-3 col-lg-3">
+                        <div className="imgbar ">
+                          <img className="w-100" src={item.attributes.mainImage} alt="" />
+                        </div>
+                      </div>
+                      <div className="col-md-9 position-relative">
+                        <h3 className="fs-16 font-sb text-color-2">{item.name}</h3>
+                        <p className="fs-14 font-r text-color-1 pt-1 prodes">
+                          {item.attributes
+                            .description}
+                        </p>
+                        <div className="d-flex pt-3">
+                          <p className="fs-14 font-sb text-color-1">
+                            Size: <span className="text-color-2">{getSize(item)}</span>
+                          </p>
+                          <p className="fs-14 font-sb text-color-1 ms-4">
+                            Colour: <span className="text-color-2">{getColor(item)}</span>
+                          </p>
+                          <p className="fs-14 font-sb text-color-1 ms-4">
+                            Qty: <span className="text-color-2">
+                              {item.quantity}
+                            </span>
+                          </p>
+                        </div>
+                        {/* <div className="d-flex pt-2">
                     <p className="fs-14 font-sb text-color-1">
                       Size: <span className="text-color-2">XL</span>
                     </p>
@@ -208,27 +280,16 @@ const ThankYou: NextPage = () => {
                     <p className="fs-14 font-sb text-color-1 ms-4">
                       Qty: <span className="text-color-2">3</span>
                     </p>
-                  </div>
-                  <div className="d-flex pt-2">
-                    <p className="fs-14 font-sb text-color-1">
-                      Size: <span className="text-color-2">XL</span>
-                    </p>
-                    <p className="fs-14 font-sb text-color-1 ms-4">
-                      Colour: <span className="text-color-2">Blue</span>
-                    </p>
-                    <p className="fs-14 font-sb text-color-1 ms-4">
-                      Qty: <span className="text-color-2">3</span>
-                    </p>
-                  </div>
-                  <div className="d-flex topBarAlign">
-                    <p className="fs-16 font-b text-color-3 align-self-center me-3">
-                      ₹3,499
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>)
-            })}
+                  </div> */}
+                        <div className="d-flex topBarAlign">
+                          <p className="fs-16 font-b text-color-3 align-self-center me-3">
+                            {item.value.amount}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>)
+                })}
 
 
             </div>
@@ -237,21 +298,23 @@ const ThankYou: NextPage = () => {
               <div className="col-md-6">
                 <h3 className="fs-20 font-m text-color-2">Payment</h3>
                 <p className="fs-20 font-r text-color-1 mt-4">
-                  **** 4908 <img src="images/visa.png" alt="" />
+                  {/* **** 4908 <img src="/images/visa.png" alt="" /> */}
+                  {authStatus == "AUTH_APPROVED" ? "RUPIFI (BNPL)" : "Cash On Delivery"}
                 </p>
               </div>
               <div className="col-md-6">
                 <h3 className="fs-20 font-m text-color-2">Delivery</h3>
                 <h5 className="fs-14 font-r text-color-1 mt-4 mb-2">Address</h5>
                 <p className="fs-20 font-r text-color-10">
-                  301, Adehwar Darshan, Ram Maruti Rd, Opp Metlife, Thane
+                  {orderItems?.billing_address?.line_1}{orderItems?.billing_address?.line_2}{orderItems?.billing_address?.city}
+                  {orderItems?.billing_address?.postcode}
                 </p>
-                <h5 className="fs-14 font-r text-color-1 mt-4 mb-2">
+                {/* <h5 className="fs-14 font-r text-color-1 mt-4 mb-2">
                   Delivery Method
                 </h5>
                 <p className="fs-20 font-r text-color-10">
                   Express Delivery (within 24 hrs)
-                </p>
+                </p> */}
               </div>
             </div>
             <hr className="my-4 my-md-5" />
@@ -259,7 +322,7 @@ const ThankYou: NextPage = () => {
               <div className="col-md-6 helpBar">
                 <h3 className="fs-20 font-m text-color-2">Need Help?</h3>
                 <ul className="mt-4">
-                  <li className="mb-1">
+                  {/* <li className="mb-1">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width={16}
@@ -308,8 +371,8 @@ const ThankYou: NextPage = () => {
                     <a className="fs-20 font-r text-color-10" href="#">
                       Returns
                     </a>
-                  </li>
-                  <li>
+                  </li> */}
+                  <li style={(orderItems?.status === 'cancelled') ? { pointerEvents: 'none', } : {}}>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width={16}
@@ -320,44 +383,46 @@ const ThankYou: NextPage = () => {
                     >
                       <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
                     </svg>
-                    <a className="fs-20 font-r text-color-10" href="#">
-                      Cancel Order
-                    </a>
+                   {orderItems?.status === 'cancelled' ? <a className="fs-20 font-r text-color-10" >
+                    Order cancelled
+                    </a>:<a className="fs-20 font-r text-color-10" onClick={() => { cancelOrder(orderItems.id) }}>
+                      Cancel order
+                    </a>}
                   </li>
                 </ul>
               </div>
-              <div className="col-md-6">
+              <div className="col-md-6 mb-3">
                 <h3 className="fs-20 font-m text-color-2">Billing Info</h3>
                 <ul className="mt-4">
                   <li className="fs-20 font-r text-color-10 d-flex mb-1">
                     Subtotal
                     <small className="text-color-2 text-end ms-auto">
-                      ₹15,297.00{" "}
+                      ₹{orderItems?.meta.display_price.with_tax.amount}
                     </small>
                   </li>
                   <li className="fs-16 font-r text-color-10 d-flex mb-1">
                     Offer Applied
                     <small className="text-color-2 text-end ms-auto">
-                      - ₹97.00{" "}
+
                     </small>
                   </li>
                   <li className="fs-16 font-r text-color-10 d-flex mb-1">
                     Delivery (Express)
                     <small className="text-color-2 text-end ms-auto">
-                      + ₹100.00
+
                     </small>
                   </li>
                   <li className="fs-16 font-r text-color-10 d-flex mb-1">
-                    GST (18%)
+                    GST
                     <small className="text-color-2 text-end ms-auto">
-                      + ₹100.00{" "}
+
                     </small>
                   </li>
                   <hr style={{ borderTop: "dashed 1px #ccc" }} />
                   <li className="fs-20 font-r text-color-10 d-flex mb-1">
                     Total
                     <small className="text-color-2 text-end ms-auto">
-                      ₹16,500.00
+                      ₹{orderItems?.meta.display_price.with_tax.amount}
                     </small>
                   </li>
                 </ul>
@@ -444,9 +509,9 @@ const ThankYou: NextPage = () => {
           <img className="w-100" src="images/advertise.png" alt="" />
         </a>
       </section> */}
-      <div className="m-3">
-      <VisitNunchiBanner />
-        </div>
+
+      {/* <VisitNunchiBanner /> */}
+
     </div>
   );
 }
