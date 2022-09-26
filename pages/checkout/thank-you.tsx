@@ -87,7 +87,7 @@ const ThankYou: NextPage = () => {
     }
 
     return () => { };
-  }, []);
+  }, [merchantPaymentRefId]);
 
   function getCustomerOrders() {
     CustomerOrderService.getInstance()
@@ -216,7 +216,7 @@ const ThankYou: NextPage = () => {
             </ul>
             <a
               href="/"
-              className=" fs-16 b-t-h btn  border font-sb  text-center w-30 mt-4" style={{color:"white"}}
+              className=" fs-16 b-t-h btn  border font-sb  text-center w-30 mt-4" style={{ color: "white" }}
             >
               Back to home page{" "}
               <svg
@@ -236,7 +236,7 @@ const ThankYou: NextPage = () => {
           </div>
         </div>
         <div className="row cartItem m-3">
-          <div className="col-md-12 col-lg-8">
+          {/* <div className="col-md-12 col-lg-8">
             <h4 className="fs-20 font-m text-color-1 text-start">
               Order summary
             </h4>
@@ -270,17 +270,17 @@ const ThankYou: NextPage = () => {
                             </span>
                           </p>
                         </div>
-                        {/* <div className="d-flex pt-2">
-                    <p className="fs-14 font-sb text-color-1">
-                      Size: <span className="text-color-2">XL</span>
-                    </p>
-                    <p className="fs-14 font-sb text-color-1 ms-4">
-                      Colour: <span className="text-color-2">Blue</span>
-                    </p>
-                    <p className="fs-14 font-sb text-color-1 ms-4">
-                      Qty: <span className="text-color-2">3</span>
-                    </p>
-                  </div> */}
+                        <div className="d-flex pt-2">
+                          <p className="fs-14 font-sb text-color-1">
+                            Size: <span className="text-color-2">XL</span>
+                          </p>
+                          <p className="fs-14 font-sb text-color-1 ms-4">
+                            Colour: <span className="text-color-2">Blue</span>
+                          </p>
+                          <p className="fs-14 font-sb text-color-1 ms-4">
+                            Qty: <span className="text-color-2">3</span>
+                          </p>
+                        </div>
                         <div className="d-flex topBarAlign">
                           <p className="fs-16 font-b text-color-3 align-self-center me-3">
                             {item.value.amount}
@@ -298,7 +298,7 @@ const ThankYou: NextPage = () => {
               <div className="col-md-6">
                 <h3 className="fs-20 font-m text-color-2">Payment</h3>
                 <p className="fs-20 font-r text-color-1 mt-4">
-                  {/* **** 4908 <img src="/images/visa.png" alt="" /> */}
+                  4908 <img src="/images/visa.png" alt="" />
                   {authStatus == "AUTH_APPROVED" ? "RUPIFI (BNPL)" : "Cash On Delivery"}
                 </p>
               </div>
@@ -309,12 +309,12 @@ const ThankYou: NextPage = () => {
                   {orderItems?.billing_address?.line_1}{orderItems?.billing_address?.line_2}{orderItems?.billing_address?.city}
                   {orderItems?.billing_address?.postcode}
                 </p>
-                {/* <h5 className="fs-14 font-r text-color-1 mt-4 mb-2">
+                <h5 className="fs-14 font-r text-color-1 mt-4 mb-2">
                   Delivery Method
                 </h5>
                 <p className="fs-20 font-r text-color-10">
                   Express Delivery (within 24 hrs)
-                </p> */}
+                </p>
               </div>
             </div>
             <hr className="my-4 my-md-5" />
@@ -322,7 +322,7 @@ const ThankYou: NextPage = () => {
               <div className="col-md-6 helpBar">
                 <h3 className="fs-20 font-m text-color-2">Need Help?</h3>
                 <ul className="mt-4">
-                  {/* <li className="mb-1">
+                  <li className="mb-1">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width={16}
@@ -371,7 +371,7 @@ const ThankYou: NextPage = () => {
                     <a className="fs-20 font-r text-color-10" href="#">
                       Returns
                     </a>
-                  </li> */}
+                  </li>
                   <li style={(orderItems?.status === 'cancelled') ? { pointerEvents: 'none', } : {}}>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -383,9 +383,9 @@ const ThankYou: NextPage = () => {
                     >
                       <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
                     </svg>
-                   {orderItems?.status === 'cancelled' ? <a className="fs-20 font-r text-color-10" >
-                    Order cancelled
-                    </a>:<a className="fs-20 font-r text-color-10" onClick={() => { cancelOrder(orderItems.id) }}>
+                    {orderItems?.status === 'cancelled' ? <a className="fs-20 font-r text-color-10" >
+                      Order cancelled
+                    </a> : <a className="fs-20 font-r text-color-10" onClick={() => { cancelOrder(orderItems.id) }}>
                       Cancel order
                     </a>}
                   </li>
@@ -428,7 +428,7 @@ const ThankYou: NextPage = () => {
                 </ul>
               </div>
             </div>
-          </div>
+          </div> */}
           {/* <div className="col-md-12 col-lg-4">
             <div className="row">
               <div className="col-md-12">
