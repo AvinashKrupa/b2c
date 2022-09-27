@@ -18,7 +18,7 @@ const Logout = (props: any) => {
     router.replace(Permalink.ofHomePage())
   };
   return (
-    <Modal show={props.isShowing} animation={false} size={"m"} id="checkOut">
+    <Modal show={props.isShowing} animation={false} size={"sm"} id="checkOut">
       <button
         type="button"
         className="btn-close"
