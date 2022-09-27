@@ -83,4 +83,52 @@ export class CustomerOrderService extends HTTPBaseService {
         });
     });
   };
+
+  public getOrderItems = (id:any) => {
+    return new Promise((resolve: any, reject: any) => {
+      this.instance
+        .get(API.GET_ORDER_ITEMS+ "/" + id)
+        .then((response) => {
+          if (response.status == 200) {
+            let message = response.data.msg ?? "";
+            //Toast.showSuccess(message);
+            resolve(response);
+          } else {
+            let message = response.data.msg ?? "";
+            Toast.showError(message);
+            reject(response);
+          }
+        })
+        .catch((error) => {
+          console.log("Error", error);
+          Toast.showError(error.message);
+
+          reject(error);
+        });
+    });
+  };
+
+  public getOrderDetails = (id:any) => {
+    return new Promise((resolve: any, reject: any) => {
+      this.instance
+        .get(API.ORDERS+ "/" + id)
+        .then((response) => {
+          if (response.status == 200) {
+            let message = response.data.msg ?? "";
+            //Toast.showSuccess(message);
+            resolve(response);
+          } else {
+            let message = response.data.msg ?? "";
+            Toast.showError(message);
+            reject(response);
+          }
+        })
+        .catch((error) => {
+          console.log("Error", error);
+          Toast.showError(error.message);
+
+          reject(error);
+        });
+    });
+  };
 }

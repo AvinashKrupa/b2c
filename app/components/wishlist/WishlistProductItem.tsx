@@ -27,9 +27,7 @@ const WishlistProductItem = (props: any) => {
         getProduct(props.id.id);
     }, []);
 
-    function getProduct(id: any) {
-        let aa: any = []
-        CatalogService.getInstance()
+    function getProduct(id: any) {CatalogService.getInstance()
             .getProducDetail(id)
             .then((data: any) => {
 
@@ -37,7 +35,7 @@ const WishlistProductItem = (props: any) => {
                 setLoading(false)
             })
             .catch((error) => { });
-        return aa
+
     }
 
     function getProductDetail(id: any) {

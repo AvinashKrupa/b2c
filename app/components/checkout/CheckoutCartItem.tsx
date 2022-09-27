@@ -5,15 +5,16 @@ import Permalink from "../../../utils/Permalink";
 import Toast from "../../../utils/Toast";
 
 const CheckoutCartItem = (props: any) => {
-  function getSize() {
-    let data = props.meta?.variant.filter((info: any) => {
+  function getSize(item:any) {
+
+    let data = item?.meta?.variant?.filter((info: any) => {
       return info.name == "Size";
     });
 
     if (data && data.length > 0) return data[0].options?.name;
   }
-  function getColor() {
-    let data = props.meta?.variant.filter((info: any) => {
+  function getColor(item:any) {
+    let data = item?.meta?.variant?.filter((info: any) => {
       return info.name == "Color";
     });
     if (data && data.length > 0) return data[0].options?.name;
@@ -99,13 +100,14 @@ const removeCartitem = (id: any) => {
           </p>
           <div className="d-flex py-3 align-items-center">
             <p className="fs-14 font-sb text-color-1">
-              Size: <span className="text-color-2">{getSize()}</span>
+              Size: <span className="text-color-2">{getSize(item)}</span>
             </p>
             <p className="fs-14 font-sb text-color-1 ms-4">
-              Colour: <span className="text-color-2">{getColor()}</span>
+              Colour: <span className="text-color-2">{getColor(item)}</span>
             </p>
             <div className="d-flex topBarAlign position-static ms-2">
               <div className="quantity d-flex px-2 ">
+              <label className="fs-14 font-r text-color-1 pt-1">Qty</label>
                 {/* <label className="fs-14 font-r text-color-1 pt-1">Qty</label>
                 <select
                   className="form-select fs-14 font-r"
