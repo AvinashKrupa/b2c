@@ -15,7 +15,6 @@ const useCartStore = create((set) => ({
     set((state) => ({
       count: LocalStorageService.getCartItems()?.length || 0,
       cartItems: LocalStorageService.getCartItems() || [],
-
     }));
   },
 }));

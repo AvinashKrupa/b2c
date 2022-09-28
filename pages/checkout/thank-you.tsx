@@ -9,22 +9,23 @@ import { CustomerOrderService } from "../../network/gateway/CustomerOrderService
 import useUserStore from "../../zustand/store";
 import shallow from "zustand/shallow";
 import OrderItems from "../../app/components/checkout/OrderItems";
+import Loader from "../../app/components/loader/loader";
 
-interface iProps { }
+interface iProps {}
 
 const ThankYou: NextPage = () => {
   const router = useRouter();
   const { merchantPaymentRefId } = router.query;
   const [authStatus, setAuthStatus] = useState<string>("");
   const [rupifiResponse, setRupifiResponse] = useState<any>({});
-  const [startDate,] = useState(new Date());
+  const [startDate] = useState(new Date());
   const [deliveryDate, setDeliveyDate] = useState(new Date());
-  const [orderItems, setOrderItem] = useState<any>([])
+  const [orderItems, setOrderItem] = useState<any>([]);
   const isLogin = useUserStore((state: any) => state.isLogin, shallow);
   const setLoginPopup = useUserStore((state: any) => state.showLogin);
-  const [productIds, setProductIds] = useState([])
-  const [orderDetails, setOrderDetails] = useState()
-
+  const [productIds, setProductIds] = useState([]);
+  const [orderDetails, setOrderDetails] = useState();
+  const [loading, setLoading] = useState<boolean>(true);
 
   const months = [
     "January",
@@ -52,7 +53,7 @@ const ThankYou: NextPage = () => {
     if (authStatus == "AUTH_APPROVED") {
       updateOrder();
     }
-    return () => { };
+    return () => {};
   }, [authStatus]);
 
   const updateOrder = async () => {
@@ -60,7 +61,7 @@ const ThankYou: NextPage = () => {
     RupifiUCService.getInstance("")
       .successPayment({
         merchantCustomerRefId: customer_id,
-        ...rupifiResponse
+        ...rupifiResponse,
       })
       .then((response: any) => {
         if (response?.status == 200) {
@@ -82,7 +83,7 @@ const ThankYou: NextPage = () => {
   useEffect(() => {
     addDays(3);
     Cart.regenrateCustomerCartAssociation();
-    return () => { };
+    return () => {};
   }, []);
 
   useEffect(() => {
@@ -91,9 +92,8 @@ const ThankYou: NextPage = () => {
       // getOrdersDetails(merchantPaymentRefId);
       fetchDataFromServer(merchantPaymentRefId);
     }
-    return () => { };
+    return () => {};
   }, [merchantPaymentRefId]);
-
 
   async function fetchDataFromServer(id: any) {
     await getOrdersDetails(id);
@@ -105,13 +105,15 @@ const ThankYou: NextPage = () => {
       CustomerOrderService.getInstance()
         .getOrderItems(id)
         .then((data: any) => {
-          setOrderItem(data.data.data)
-          setProductIds(productIds)
+          setOrderItem(data.data.data);
+          setProductIds(productIds);
+          setLoading(false);
           resolve(data);
-        }).catch((error) => {
+        })
+        .catch((error) => {
           reject(error);
         });
-    })
+    });
   }
 
   function getOrdersDetails(id: any) {
@@ -119,25 +121,24 @@ const ThankYou: NextPage = () => {
       CustomerOrderService.getInstance()
         .getOrderDetails(id)
         .then((data: any) => {
-          setOrderDetails(data?.data?.data)
+          setOrderDetails(data?.data?.data);
           resolve(data);
-        }).catch((error) => {
+        })
+        .catch((error) => {
           reject(error);
         });
-    }
-    )
+    });
   }
 
   function cancelOrder(id: string) {
     const param = {
-      "status": "cancelled"
-    }
+      status: "cancelled",
+    };
     CustomerOrderService.getInstance()
       .cancelOrder(id, param)
-      .then((data: any) => {
-      }).catch((error) => { });
+      .then((data: any) => {})
+      .catch((error) => {});
   }
-
 
   return (
     <div>
@@ -150,7 +151,9 @@ const ThankYou: NextPage = () => {
             <p className="fs-20 font-m text-color-1 mt-3">
               Your order has been confirmed...!
             </p>
-            <p className="fs-20 font-m text-color-1">Order ID: {merchantPaymentRefId}</p>
+            <p className="fs-20 font-m text-color-1">
+              Order ID: {merchantPaymentRefId}
+            </p>
             <ul className="mt-3">
               <li className="list-inline-item fs-20 font-m text-color-1">
                 Order date:{" "}
@@ -222,7 +225,8 @@ const ThankYou: NextPage = () => {
             </ul>
             <a
               href="/"
-              className=" fs-16 b-t-h btn  border font-sb  text-center w-30 mt-4" style={{ color: "white" }}
+              className=" fs-16 b-t-h btn  border font-sb  text-center w-30 mt-4"
+              style={{ color: "white" }}
             >
               Back to home page{" "}
               <svg
@@ -241,12 +245,18 @@ const ThankYou: NextPage = () => {
             </a>
           </div>
         </div>
-        <OrderItems
-          orderItems={orderItems}
-          authStatus={authStatus}
-          orderDetails={orderDetails}
-          cancelOrder={cancelOrder}
-        />
+        {loading ? (
+          <div className="mt-5">
+            <Loader loading={loading} />{" "}
+          </div>
+        ) : (
+          <OrderItems
+            orderItems={orderItems}
+            authStatus={authStatus}
+            orderDetails={orderDetails}
+            cancelOrder={cancelOrder}
+          />
+        )}
       </section>
       {/* <section className="mt-5">
         <a href="#">
@@ -255,9 +265,8 @@ const ThankYou: NextPage = () => {
       </section> */}
 
       {/* <VisitNunchiBanner /> */}
-
     </div>
   );
-}
+};
 
 export default withRouter(ThankYou);

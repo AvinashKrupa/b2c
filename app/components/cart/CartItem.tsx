@@ -13,7 +13,6 @@ const CartItem = (props: any) => {
   const setLoginPopup = useUserStore((state: any) => state.showLogin);
   const [login, setLogin] = useState<boolean>(false);
   const wishItems = useWishlistStore((state: any) => state.wishlistItems);
-  const [aaa,setAAA]=useState(props)
 
   function getColor() {
     console.log("props.meta", wishItems);
@@ -39,13 +38,12 @@ const CartItem = (props: any) => {
   function moveToWishlist(product_id: string, id: string) {
     Wishlist.getInstance()
       .createWishlistEntry()
-      .then((info) => {
-
-      }).then(() => {
+      .then((info) => {})
+      .then(() => {
         Wishlist.getInstance()
           .addToWishList(product_id)
           .then(() => {
-            localStorage.removeItem("WISHLIST_ENTRY")
+            localStorage.removeItem("WISHLIST_ENTRY");
             props.removeCart(props?.id);
           })
           .catch((error) => {
@@ -55,40 +53,34 @@ const CartItem = (props: any) => {
       .catch((error) => {
         console.log("error", error);
       });
-
   }
 
-  function handleChange(e:any,id:string){
+  function handleChange(e: any, id: string) {
     e.preventDefault();
 
-    if( e.target.valueAsNumber ===0 || e.target.valueAsNumber >1000){
+    if (e.target.valueAsNumber === 0 || e.target.valueAsNumber > 1000) {
       Toast.showError("Please enter quantity 1-1000*.");
-    }
-    else{
+    } else {
       const params = {
         data: {
           id: id,
           type: "custom_item",
-          quantity: e.target.valueAsNumber
+          quantity: e.target.valueAsNumber,
         },
       };
-      if(e.target.valueAsNumber >0){
-      Cart.getInstance()
-        .updateCartQuantity(id,params)
-        .then((info: any) => {
-          console.log("upade cart quantity", info);
-          props.getCustomerCart()
-        })
-        .catch((error) => {
-          console.log("error", error);
-        });
-
+      if (e.target.valueAsNumber > 0) {
+        Cart.getInstance()
+          .updateCartQuantity(id, params)
+          .then((info: any) => {
+            console.log("upade cart quantity", info);
+            props.getCustomerCart();
+          })
+          .catch((error) => {
+            console.log("error", error);
+          });
       }
     }
-
-
   }
-
 
   return (
     <>
@@ -113,7 +105,10 @@ const CartItem = (props: any) => {
             <a href={Permalink.ofProduct(props)}>
               <h3 className="fs-16 font-sb text-color-2">{props.name}</h3>
             </a>
-            <p className="fs-14 font-r text-color-1 pt-1 prodes" style={{width:380}}>
+            <p
+              className="fs-14 font-r text-color-1 pt-1 prodes"
+              style={{ width: 380 }}
+            >
               {props.description}
             </p>
             <div className="d-flex py-3">
@@ -125,11 +120,16 @@ const CartItem = (props: any) => {
               </p>
             </div>
             <div className="d-flex mt-4">
-              {!wishItems?.includes(props.product_id) && <a className="fs-14 font-sb text-color-3" onClick={() => {
-                moveToWishlist(props.product_id, props.id)
-              }}>
-                Move to Wishlist
-              </a>}
+              {!wishItems?.includes(props.product_id) && (
+                <a
+                  className="fs-14 font-sb text-color-3"
+                  onClick={() => {
+                    moveToWishlist(props.product_id, props.id);
+                  }}
+                >
+                  Move to Wishlist
+                </a>
+              )}
               <a
                 href="#"
                 className="fs-14 font-sb text-color-3 ms-4"
@@ -148,9 +148,7 @@ const CartItem = (props: any) => {
                       {/* <span>
                         ₹{props?.discountPrice?.currencies.INR.amount}{" "}
                       </span> */}
-                        <span>
-                        ₹{props?.value.amount}{" "}
-                      </span>
+                      <span>₹{props?.value.amount} </span>
                     </span>
                     {/* <span className="last-price mb-0 fs-12 font-r">
                       <span className="text-color-1">
@@ -193,7 +191,17 @@ const CartItem = (props: any) => {
                   </option>
 
                 </select> */}
-                <input className="quantity" type="number" defaultValue={props.quantity}  min="1" max="1000" onChange={(e)=>{handleChange(e,props.id)}}  style={{width:90}} />
+                <input
+                  className="quantity"
+                  type="number"
+                  defaultValue={props.quantity}
+                  min="1"
+                  max="1000"
+                  onChange={(e) => {
+                    handleChange(e, props.id);
+                  }}
+                  style={{ width: 90 }}
+                />
               </div>
             </div>
             <div className="discount-offer text-white">

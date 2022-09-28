@@ -26,7 +26,7 @@ const OrderItems = (props: any) => {
           </div>
           <div className="col-md-6">
             <h3 className="fs-20 font-m text-color-2">Delivery</h3>
-            <h5 className="fs-14 font-r text-color-1 mt-4 mb-2">Address</h5>
+            <h5 className="fs-14 font-r text-color-1 mt-2 mb-2">Address</h5>
            {props?.orderDetails?.billing_address && <p className="fs-20 font-r text-color-10">
               {props?.orderDetails?.billing_address?.line_1}, {props?.orderDetails?.billing_address?.line_2}, {props?.orderDetails?.billing_address?.city},
               {props?.orderDetails?.billing_address?.postcode}
@@ -43,7 +43,7 @@ const OrderItems = (props: any) => {
         <div className="row text-start ">
           <div className="col-md-6 helpBar">
             <h3 className="fs-20 font-m text-color-2">Need Help?</h3>
-            <ul className="mt-4">
+            <ul className="mt-2">
               {/* <li className="mb-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

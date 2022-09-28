@@ -15,8 +15,8 @@ const useWishlistStore = create((set) => ({
   synchronized: (data: boolean) => {
     set((state) => ({
       count: LocalStorageService.getWishlist()?.length || 0,
-      wishlistItems:LocalStorageService.getWishlist() || []
+      wishlistItems: LocalStorageService.getWishlist() || [],
     }));
   },
 }));
-export default useWishlistStore
+export default useWishlistStore;
