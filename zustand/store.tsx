@@ -25,7 +25,6 @@ const useUserStore = create((set) => ({
     }));
   },
   synchronized: (data: boolean) => {
-    
     set((state) => ({
       isLogin: LocalStorageService.getAccessToken() ? true : false,
       loginPopup: false,

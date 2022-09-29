@@ -47,7 +47,7 @@ const Footer = () => {
               <p>
                 <a href="tel:73892 73884">+91 73892 73884</a>
               </p>
-            </div>            
+            </div>
           </div>
           <div className="col-md-6 col-lg-4  mt-4 mt-lg-0">
             <div className="footer-area">

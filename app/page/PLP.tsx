@@ -26,7 +26,23 @@ import { TypeSenseService } from "../../network/gateway/TypeSenseService";
 
 const PLP = () => {
   const route = useRouter();
-  const { slug, id, q, category, color, price, brand, discount_percentage, material, occasion, print, page, sort_by, shop_by_price,catalogues } = route.query;
+  const {
+    slug,
+    id,
+    q,
+    category,
+    color,
+    price,
+    brand,
+    discount_percentage,
+    material,
+    occasion,
+    print,
+    page,
+    sort_by,
+    shop_by_price,
+    catalogues,
+  } = route.query;
   const [openSearchBox, setOpenSearchBox] = useState<boolean>(false);
   const [pageCount, setPageCount] = useState<number>(1);
   const [found, setFound] = useState<number>(0);
@@ -51,16 +67,16 @@ const PLP = () => {
       addToCart(`${productId}`);
       setProductId("");
     }
-    return () => { };
+    return () => {};
   }, [userData]);
 
   useEffect(() => {
     //getProductLists("1661b1f9-64c5-44c4-aeeb-d7e8e9385fc4");
     getProductCollections();
-    return () => { };
+    return () => {};
   }, [id, route.query]);
 
-/*   function getProductList() {
+  /*   function getProductList() {
     CatalogService.getInstance()
       .getProductListing()
       .then((response: any) => {
@@ -73,7 +89,7 @@ const PLP = () => {
       .catch((error) => { });
   } */
 
-/*   function getProductLists(id: any) {
+  /*   function getProductLists(id: any) {
     CatalogService.getInstance()
       .getProductByNode(id)
       .then((response: any) => {
@@ -91,45 +107,49 @@ const PLP = () => {
   function getFilterQuery() {
     let queryString = "";
 
-    if(category){
-      queryString+="category:="+category+"&&";
+    if (category) {
+      queryString += "category:=" + category + "&&";
     }
-    if(color){
-      queryString+="color:="+color+"&&";
+    if (color) {
+      queryString += "color:=" + color + "&&";
     }
-    if(price){
+    if (price) {
       let priceRange: any = price;
       priceRange = priceRange.split(",");
-      queryString+="sale_price:>"+priceRange[0]+"&&sale_price:<"+priceRange[1]+"&&";
+      queryString +=
+        "sale_price:>" +
+        priceRange[0] +
+        "&&sale_price:<" +
+        priceRange[1] +
+        "&&";
     }
-    if(brand){
-      queryString+="brand:="+brand+"&&";
+    if (brand) {
+      queryString += "brand:=" + brand + "&&";
     }
-    if(discount_percentage){
-      queryString+="discount_percentage:<"+discount_percentage+"&&";
+    if (discount_percentage) {
+      queryString += "discount_percentage:<" + discount_percentage + "&&";
     }
-    if(material){
-      queryString+="material:="+material+"&&";
+    if (material) {
+      queryString += "material:=" + material + "&&";
     }
-    if(occasion){
-      queryString+="occasion:="+occasion+"&&";
+    if (occasion) {
+      queryString += "occasion:=" + occasion + "&&";
     }
-    if(print){
-      queryString+="print:="+print+"&&";
+    if (print) {
+      queryString += "print:=" + print + "&&";
     }
-    if(shop_by_price){
-      queryString+="sale_price:="+shop_by_price+"&&";
+    if (shop_by_price) {
+      queryString += "sale_price:=" + shop_by_price + "&&";
     }
-    if(catalogues){
-      queryString+="catalogues:="+catalogues+"&&";
+    if (catalogues) {
+      queryString += "catalogues:=" + catalogues + "&&";
     }
     return queryString;
   }
 
   function getSortQuery() {
-
     let queryString = "created_at:desc";
-    switch(sort_by){
+    switch (sort_by) {
       case "revelance":
         //queryString="revelance:asc";
         break;
@@ -137,13 +157,13 @@ const PLP = () => {
         //queryString="popular:asc";
         break;
       case "created_at":
-        queryString="created_at:asc";
+        queryString = "created_at:asc";
         break;
       case "price":
-        queryString="sale_price:asc";
+        queryString = "sale_price:asc";
         break;
       case "minimum_order_quantity":
-        queryString="minimum_order_quantity:asc";
+        queryString = "minimum_order_quantity:asc";
         break;
       default:
         break;
@@ -154,26 +174,30 @@ const PLP = () => {
   function getProductCollections() {
     setLoading(true);
     let requestJSON: any = {
-      "q": q ?? "",
-      "query_by": "name,category,color,brand,material,occasion,description",
-      "page": Number(page) || 1,
-      "per_page": 20,
-      "filter_by": getFilterQuery(),
-      "sort_by": getSortQuery(),
+      q: q ?? "",
+      query_by: "name,category,color,brand,material,occasion,description",
+      page: Number(page) || 1,
+      per_page: 20,
+      filter_by: getFilterQuery(),
+      sort_by: getSortQuery(),
     };
     TypeSenseService.getInstance()
       .getProductCollections(requestJSON)
       .then((response: any) => {
         if (response.data) {
-          setFound(response.data.found || 0)
-          setPageCount(Math.ceil(response.data.found/response.data.request_params.per_page))
+          setFound(response.data.found || 0);
+          setPageCount(
+            Math.ceil(
+              response.data.found / response.data.request_params.per_page
+            )
+          );
           setProductListing(response.data.data);
         } else {
           console.log("ERROR:", response.data);
         }
         setLoading(false);
       })
-      .catch((error) => { });
+      .catch((error) => {});
   }
 
   function getProductDetail(id: any) {
@@ -188,7 +212,7 @@ const PLP = () => {
           console.log("ERROR:", response.data);
         }
       })
-      .catch((error) => { });
+      .catch((error) => {});
   }
 
   function addToCart(id: string) {
@@ -211,23 +235,24 @@ const PLP = () => {
 
   function addToWishList(id: string) {
     Wishlist.getInstance()
-    .createWishlistEntry()
-    .then((info) => {
-      console.log("info", info);
-    }).then(() => {
-      Wishlist.getInstance()
-        .addToWishList(id)
-        .then((info) => {
-          console.log("info", info);
-          localStorage.removeItem("WISHLIST_ENTRY")
-        })
-        .catch((error) => {
-          console.log("error", error);
-        });
-    })
-    .catch((error) => {
-      console.log("error", error);
-    });
+      .createWishlistEntry()
+      .then((info) => {
+        console.log("info", info);
+      })
+      .then(() => {
+        Wishlist.getInstance()
+          .addToWishList(id)
+          .then((info) => {
+            console.log("info", info);
+            localStorage.removeItem("WISHLIST_ENTRY");
+          })
+          .catch((error) => {
+            console.log("error", error);
+          });
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
   }
 
   function getProductsBundle() {
@@ -240,23 +265,21 @@ const PLP = () => {
           console.log("ERROR:", response.data);
         }
       })
-      .catch((error) => { });
+      .catch((error) => {});
   }
   function deletwishlistItem(id: string) {
-    let entry_id
+    let entry_id;
     LocalStorageService.getWishlistIDEntry_ID().data?.map((each: any) => {
       if (each.id === id) {
-        return entry_id = each.entry_id
+        return (entry_id = each.entry_id);
       }
-    })
+    });
     Wishlist.getInstance()
       .deleteWishListItem(entry_id, id)
-      .then((response: any) => {
-      })
+      .then((response: any) => {})
       .catch((error) => {
         console.log("error", error);
       });
-
   }
 
   return (
@@ -278,11 +301,11 @@ const PLP = () => {
               <div className="col-lg-9 col-xl-10">
                 <div className="rightside-bar">
                   <SearchBlock setOpenSearchBox={setOpenSearchBox} />
-                  {found>0 && <SortByBlock route={route}/>}
+                  {found > 0 && <SortByBlock route={route} />}
                   <div className="row">
                     {loading && <Loader loading={loading} />}
                     {productListing.map((item: any, index: number) => {
-                       return (
+                      return (
                         <TypeSenseProductSmallBlock
                           key={index}
                           {...item}
@@ -307,13 +330,12 @@ const PLP = () => {
                               setLoginPopup(true);
                             }
                           }}
-                          onDeletwishlistItem={(id:string) => {
+                          onDeletwishlistItem={(id: string) => {
                             if (LocalStorageService.getAccessToken()) {
-                              deletwishlistItem(`${id}`)
+                              deletwishlistItem(`${id}`);
                             } else {
                               setLoginPopup(true);
                             }
-
                           }}
                         />
                       );
@@ -340,9 +362,12 @@ const PLP = () => {
                       );
                     })} */}
                   </div>
-                  {found==0 && !loading && (
-                  <div className="text-center"><br/><b>No products found mathing the applied search.</b></div>
-                )}
+                  {found == 0 && !loading && (
+                    <div className="text-center">
+                      <br />
+                      <b>No products found mathing the applied search.</b>
+                    </div>
+                  )}
                 </div>
                 {/* <SortingBlock />
                 <div className="rightside-bar">
@@ -369,8 +394,13 @@ const PLP = () => {
                     })}
                   </div>
                 </div>*/}
-                { found>0 && <Paging currentPage={page || 1} pageCount={pageCount} router={route}/>}
-
+                {found > 0 && (
+                  <Paging
+                    currentPage={page || 1}
+                    pageCount={pageCount}
+                    router={route}
+                  />
+                )}
               </div>
             </div>
           </div>

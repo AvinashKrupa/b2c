@@ -1,10 +1,12 @@
 import React from "react";
 import { Cart } from "../network/gateway/Cart";
 import { Wishlist } from "../network/gateway/Wishlist";
+import LocalStorageService from "./storage/LocalStorageService";
+
 
 export default class AddServices {
     static ofAddToCart(id: any) {
-        const params = {
+         const params = {
             data: {
                 id: id,
                 type: "cart_item",

@@ -11,7 +11,7 @@ export default class Permalink {
   }
 
   static ofCategory(item: any): string {
-    return "/shop/" + item.slug + "/" + item.id;
+    return "/shop/" + item.slug + "/" + item.id+"?catalogues="+(item.title ?? item.name);
   }
 
   static ofBrand(item: any): string {
