@@ -6,7 +6,7 @@ const OrderItems = (props: any) => {
 
   return (
     <div className="row cartItem m-3">
-      <div className="col-md-12 col-lg-8">
+      <div className="col-md-12 col-lg-8 offset-2">
         <h4 className="fs-20 font-m text-color-1 text-start">
           Order summary
         </h4>
