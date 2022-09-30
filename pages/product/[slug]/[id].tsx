@@ -1269,12 +1269,12 @@ const ProductDetailScreen: NextPage = () => {
                         />
                       </button>
                     </a>
-                    {/* <a
+                    <a
                       href="#"
                       className="btn-border fs-20 me-2 d-none d-lg-inline-block"
                     >
                       Request Sample
-                    </a> */}
+                    </a>
 
                     <a href="#" className="btn-border fs-20 me-2 d-lg-none">
                       Wishlist
