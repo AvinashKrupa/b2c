@@ -4,9 +4,7 @@ import FooterDetail from "./FooterDetail";
 
 const Footer = () => {
 
-  const handleSubmit = (e) => {
-    e.prevent.default();
-  }
+  
   return (
     <>
       <footer className="footer">
