@@ -353,19 +353,19 @@ const ThemeOne: NextPage = () => {
         <ComplimentYourOutfits data={topCompliment} />
       </div>
       {/* Designer’s Pick */}
-      {/* <DesignersPick /> */}
+      <DesignersPick />
       {/* Why NavTatva? */}
-      {/* <WhyNavTatva /> */}
+      <WhyNavTatva />
       {/* Most Searched Styles*/}
-      {/* <MostSearchedStyles /> */}
+      <MostSearchedStyles />
       {/* Wedding Season Is Almost Here*/}
       {/* <WeddingSeasonIsHere /> */}
       {/* For the look you desire*/}
       {/* <ForTheLookYouDesire /> */}
       {/* Our Valued Customers*/}
-      {/* <OurValuedCustomers /> */}
+      <OurValuedCustomers />
       {/* Our Valued Customer Slider*/}
-      {/* <OurValuedCustomerSlider /> */}
+      <OurValuedCustomerSlider />
       {/* Spend More, Win More*/}
       {/* <SpendMoreWinMore /> */}
       {/* New Collections*/}
@@ -377,14 +377,11 @@ const ThemeOne: NextPage = () => {
       {/* For the look you desire */}
       {/* <ForTheLookYouDesireFabric /> */}
       {/* Video Block */}
-      {/* <VideoBlock /> */}
+      <VideoBlock />
       {/* End Video Block */}
       {/* Footer */}
       <Footer />
       {/* End Footer */}
-      {/* Fixed Button */}
-      <FooterFixedButton />
-      {/* End Fixed Button */}
     </div>
   );
 };

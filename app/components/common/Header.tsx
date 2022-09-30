@@ -14,6 +14,14 @@ const Header = () => {
   const [isShowing, setIsShowing] = useState<boolean>(false);
   const isLogin = useUserStore((state: any) => state.isLogin, shallow);
   const setLoginPopup = useUserStore((state: any) => state.showLogin);
+  const [menuItems, setMenuItems] = useState<any>([
+    "Sarees",
+    "Lehangas",
+    "Kurtis & Tunics",
+    "Kurta Sets",
+    "Sharara Sets",
+    "Fancy Ethnic",
+  ]);
 
   function signOut() {
     if (isLogin) {
@@ -22,7 +30,11 @@ const Header = () => {
       setLoginPopup(true);
     }
   }
-  useEffect(() => {}, [isLogin]);
+  useEffect(() => { }, [isLogin]);
+
+  const handleClick = (item: any) => {
+    router.push(Permalink.ofShop()+"?q="+item)
+  }
 
   return (
     <>
@@ -68,36 +80,16 @@ const Header = () => {
                   id="navbarSupportedContent"
                 >
                   <ul className="navbar-nav mx-auto">
-                    <li className="nav-item active">
-                      <a className="nav-link" href="#">
-                        Sarees
-                      </a>
-                    </li>
-                    <li className="nav-item">
-                      <a className="nav-link" href="#">
-                        Lehangas
-                      </a>
-                    </li>
-                    <li className="nav-item active">
-                      <a className="nav-link" href="#">
-                        Kurtis &amp; Tunics
-                      </a>
-                    </li>
-                    <li className="nav-item">
-                      <a className="nav-link" href="#">
-                        Kurta Sets
-                      </a>
-                    </li>
-                    <li className="nav-item active">
-                      <a className="nav-link" href="#">
-                        Sharara Sets
-                      </a>
-                    </li>
-                    <li className="nav-item">
-                      <a className="nav-link" href="#">
-                        Fancy Ethnic
-                      </a>
-                    </li>
+                    {
+                      menuItems?.map((item: any, index: number) => {
+                        return (
+                          <li key={index} className="nav-item active">
+                            <a className="nav-link" onClick={() => handleClick(item)}>
+                              {item}
+                            </a>
+                          </li>)
+                      })
+                    }
                   </ul>
                 </div>
                 <CommonIconBar />
