@@ -42,11 +42,13 @@ const ProductDetailScreen: NextPage = () => {
   ];
   const [sizeValues, setSizeValues] = useState<any>(initSizeValues);
   const [colorPopup, setColorPopup] = useState<boolean>(false)
+  const [recentlyViewedItems, setRecentlyViewedItems] = useState<any>([])
 
   useEffect(() => {
     if (id) {
       getProductDetail(id);
     }
+    setRecentlyViewedItems(LocalStorageService.getRecentItems())
     return () => { };
   }, [id]);
 
@@ -58,6 +60,9 @@ const ProductDetailScreen: NextPage = () => {
           if (response.data) {
             setProduct(new ProductObj(response?.data?.data));
             setLoading(false)
+            if(product?.getId()){
+              LocalStorageService.setRecentItem(product?.getId())
+            }            
           } else {
             console.log("ERROR:", response.data);
           }
@@ -1218,13 +1223,33 @@ const ProductDetailScreen: NextPage = () => {
               )
             }
             {/* Similar Products */}
-            <DetailSimilarProducts />
+            { product && <DetailSimilarProducts 
+              name={product?.getName()} 
+              addToCart={addToCart} 
+              addToWishList={addToWishList}
+              deleteFromWishlist={deleteFromWishlist}
+              cartItems={cartItems}
+              setLogin={setLogin}
+            />}
             {/* End Similar Products */}
             {/* Upsell Cross sell */}
-            <DetailUpsellCrossSell />
+            <DetailUpsellCrossSell 
+              addToCart={addToCart} 
+              addToWishList={addToWishList}
+              deleteFromWishlist={deleteFromWishlist}
+              cartItems={cartItems}
+              setLogin={setLogin}
+            />
             {/* End Upsell Cross sell */}
             {/* Recently Viewed */}
-            <DetailRecentlyViewed />
+            {recentlyViewedItems?.length>0 && <DetailRecentlyViewed 
+              items={recentlyViewedItems} 
+              addToCart={addToCart} 
+              addToWishList={addToWishList}
+              deleteFromWishlist={deleteFromWishlist}
+              cartItems={cartItems}
+              setLogin={setLogin}
+            />}
             {/* End Recently Viewed */}
           </div>
           <Footer />
