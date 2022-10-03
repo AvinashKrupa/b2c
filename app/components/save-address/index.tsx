@@ -250,9 +250,9 @@ const SaveAddress = () => {
                         >
                           EDIT
                         </button>
-                        {/* <button type="button" className="address-btn">
+                        <button type="button" className="address-btn">
                           SHARE
-                        </button> */}
+                        </button>
                         <button
                           type="button"
                           className="address-btn"
@@ -266,7 +266,7 @@ const SaveAddress = () => {
                     </div>
                   </div>
                   <div className="col-12 col-md-4">
-                    {/* <div className="map-area">
+                    <div className="map-area">
                       <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3030850.3776743794!2d132.52611295403742!3d-24.76215616266133!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2b2bfd076787c5df%3A0x538267a1955b1352!2sAustralia!5e0!3m2!1sen!2sin!4v1661429956943!5m2!1sen!2sin"
                         width="100%"
@@ -276,7 +276,7 @@ const SaveAddress = () => {
                         loading="lazy"
                         referrerPolicy="no-referrer-when-downgrade"
                       />
-                    </div> */}
+                    </div>
                   </div>
                 </div>
               </div>

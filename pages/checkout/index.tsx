@@ -315,7 +315,7 @@ const CheckoutScreen: NextPage = (props: any) => {
 
             {cartItems?.length != 0 && (
               <div className="col-md-12 col-lg-4">
-                {/* <OfferCard /> */}
+                <OfferCard />
                 <CheckoutCartItem
                   cartItems={cartItems}
                   removeCart={removeCart}
@@ -323,7 +323,7 @@ const CheckoutScreen: NextPage = (props: any) => {
                   getCustomerCart={getCustomerCart}
                   setCartItems={setCartItems}
                 />
-                {/* <PromoCode /> */}
+                <PromoCode />
               </div>
             )}
           </div>

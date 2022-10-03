@@ -8,6 +8,8 @@ import CategoryLoader from "../../../components/loader/CategoryLoader";
 import { useRouter } from "next/router";
 import Image from 'next/image';
 import CategoryDefautImage from '../../../../public/images/cate-1.jpg';
+import SubCategoryDefautImage from '../../../../public/images/sub-category.png';
+
 
 interface IProps {
   category: Array<any>;
@@ -93,13 +95,13 @@ const MenuCategorySlider = (props: IProps) => {
                     })}
                   </div>
                   <div className="col-md-12 col-lg-4 mt-4 mt-lg-0">                  
-                    {sideImageOnHover?.image && <Image
+                    <Image
                       className="h-100 category-hover-image"
-                      src={sideImageOnHover.image}
+                      src={sideImageOnHover?.image ?sideImageOnHover?.image: SubCategoryDefautImage}
                       alt=""
-                      width={400}
-                      height={200}
-                    />}
+                      width={450}
+                      height={357}
+                    />
                   </div>
                 </div>
               </div>

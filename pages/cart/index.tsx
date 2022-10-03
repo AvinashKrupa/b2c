@@ -105,7 +105,12 @@ const CartScreen: NextPage = () => {
               {cartItems?.length != 0 &&
                 cartItems?.map((item: any, index: number) => {
                   return (
-                    <CartItem key={index} {...item} removeCart={removeCart} getCustomerCart={getCustomerCart} />
+                    <CartItem
+                      key={index}
+                      {...item}
+                      removeCart={removeCart}
+                      getCustomerCart={getCustomerCart}
+                    />
                   );
                 })}
               {!loading && cartItems?.length == 0 && (
@@ -129,16 +134,16 @@ const CartScreen: NextPage = () => {
             </div>
             {cartItems?.length != 0 && (
               <div className="col-md-12 col-lg-4">
-              {/* <OfferCard /> */}
+                <OfferCard />
                 <div className="bg-white border p-3 mt-4 shipping">
                   <div className="row">
-                    {/* <div className="col-md-12 py-2">
+                    <div className="col-md-12 py-2">
                       <p className="fs-19 font-r text-color-2">
                         <span className="font-sb">2 of 4 Items</span> selected
                         for checkout
                       </p>
-                    </div> */}
-                    {/* <div className="col-md-12">
+                    </div>
+                    <div className="col-md-12">
                       <div className="gray">
                         <p className="fs-14 font-r text-color-2">
                           Add items worth
@@ -149,7 +154,7 @@ const CartScreen: NextPage = () => {
                           </span>
                         </p>
                       </div>
-                    </div> */}
+                    </div>
                     <div className="col-md-12 d-flex mt-2">
                       <h3 className="fs-19 font-sb text-color-2">Sub Total</h3>
                       <h3 className="fs-24 font-sb text-color-3 ms-auto">
@@ -168,7 +173,7 @@ const CartScreen: NextPage = () => {
                   </div>
                 </div>
                 <div className="row">
-                  {/* <div className="col-md-12 mt-4">
+                  <div className="col-md-12 mt-4">
                     <div className="mb-3 promocode ">
                       <label className="col-form-label fs-14 font-sb text-color-1">
                         Have a Promo Code?
@@ -194,15 +199,15 @@ const CartScreen: NextPage = () => {
                         </a>
                       </div>
                     </div>
-                  </div> */}
-                {/* <OngoingOffers /> */}
+                  </div>
+                  <OngoingOffers />
                 </div>
               </div>
             )}
           </div>
         </section>
-        {/* <VisitNunchiBanner /> */}
-        {/* <section className="mt-4 mt-md-5 pb-5">
+        <VisitNunchiBanner />
+        <section className="mt-4 mt-md-5 pb-5">
           <div className="row">
             <div className="col-md-12">
               <div className="heading3">
@@ -233,7 +238,9 @@ const CartScreen: NextPage = () => {
                             ₹3,450
                           </p>
                           <a
-                            onClick={() => route.replace(Permalink.ofDummyProduct())}
+                            onClick={() =>
+                              route.replace(Permalink.ofDummyProduct())
+                            }
                             className="btn-border fs-13 text-color-3"
                           >
                             More Info
@@ -275,7 +282,9 @@ const CartScreen: NextPage = () => {
                             ₹3,450
                           </p>
                           <a
-                            onClick={() => route.replace(Permalink.ofDummyProduct())}
+                            onClick={() =>
+                              route.replace(Permalink.ofDummyProduct())
+                            }
                             className="btn-border fs-13 text-color-3"
                           >
                             More Info
@@ -317,7 +326,9 @@ const CartScreen: NextPage = () => {
                             ₹3,450
                           </p>
                           <a
-                            onClick={() => route.replace(Permalink.ofDummyProduct())}
+                            onClick={() =>
+                              route.replace(Permalink.ofDummyProduct())
+                            }
                             className="btn-border fs-13 text-color-3"
                           >
                             More Info
@@ -359,7 +370,9 @@ const CartScreen: NextPage = () => {
                             ₹3,450
                           </p>
                           <a
-                            onClick={() => route.replace(Permalink.ofDummyProduct())}
+                            onClick={() =>
+                              route.replace(Permalink.ofDummyProduct())
+                            }
                             className="btn-border fs-13 text-color-3"
                           >
                             More Info
@@ -401,7 +414,9 @@ const CartScreen: NextPage = () => {
                             ₹3,450
                           </p>
                           <a
-                            onClick={() => route.replace(Permalink.ofDummyProduct())}
+                            onClick={() =>
+                              route.replace(Permalink.ofDummyProduct())
+                            }
                             className="btn-border fs-13 text-color-3"
                           >
                             More Info
@@ -428,7 +443,7 @@ const CartScreen: NextPage = () => {
               </div>
             </div>
           </div>
-        </section> */}
+        </section>
       </div>
     </div>
   );

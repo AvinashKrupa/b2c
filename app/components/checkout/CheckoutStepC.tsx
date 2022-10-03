@@ -71,7 +71,7 @@ const CheckoutStepC = (props: any) => {
       >
         <div className="accordion-body">
           {/**CREDIT CARD */}
-          {!availCreditCard && (
+          {availCreditCard && (
             <div className="my-3">
               <div data-toggle="collapse">
                 <input

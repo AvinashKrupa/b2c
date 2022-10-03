@@ -10,10 +10,27 @@ import useUserStore from "../../zustand/store";
 import shallow from "zustand/shallow";
 import OrderItems from "../../app/components/checkout/OrderItems";
 import Loader from "../../app/components/loader/loader";
+//import OrderInvoice from "../../app/components/invoice/OrderInvoice";
+import {
+  PDFDownloadLink,
+  Page,
+  Text,
+  View,
+  Document,
+  StyleSheet,
+  BlobProvider,
+} from "@react-pdf/renderer";
+import Permalink from "../../utils/Permalink";
+import InvoiceModal from "../../app/components/invoice/InvoiceModel";
+//import ReactToPdf from "react-to-pdf";
 
 interface iProps {}
 
 const ThankYou: NextPage = () => {
+  const options = {
+    orientation: "landscape",
+  };
+  const ref = React.createRef();
   const router = useRouter();
   const { merchantPaymentRefId } = router.query;
   const [authStatus, setAuthStatus] = useState<string>("");
@@ -24,8 +41,9 @@ const ThankYou: NextPage = () => {
   const isLogin = useUserStore((state: any) => state.isLogin, shallow);
   const setLoginPopup = useUserStore((state: any) => state.showLogin);
   const [productIds, setProductIds] = useState([]);
-  const [orderDetails, setOrderDetails] = useState();
+  const [orderDetails, setOrderDetails] = useState<any>();
   const [loading, setLoading] = useState<boolean>(true);
+  const [invoiceStatus, setInvoiceStatus] = useState<boolean>(false);
 
   const months = [
     "January",
@@ -122,6 +140,7 @@ const ThankYou: NextPage = () => {
         .getOrderDetails(id)
         .then((data: any) => {
           setOrderDetails(data?.data?.data);
+          console.log("this is data order details", data.data.data.id);
           resolve(data);
         })
         .catch((error) => {
@@ -184,10 +203,10 @@ const ThankYou: NextPage = () => {
                   ` ` +
                   deliveryDate.getFullYear()}
               </li>
-              {/* <li className="my-5">
+              <li className="my-5">
                 <img width={150} src="/images/thank-you.gif" alt="" />
-              </li> */}
-              {/* <li className="list-inline-item">
+              </li>
+              <li className="list-inline-item">
                 <a href="/" className="btn fs-18 w-100" tabIndex={0}>
                   Track Order
                   <svg
@@ -202,10 +221,12 @@ const ThankYou: NextPage = () => {
                     <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                   </svg>
                 </a>
-              </li> */}
-              {/* <li className="list-inline-item">
+              </li>
+              <li className="list-inline-item">
                 <a
-                  href="#"
+                  onClick={() => {
+                    setInvoiceStatus(true);
+                  }}
                   className="btn fs-18 w-100 btn-default"
                   tabIndex={0}
                 >
@@ -221,28 +242,8 @@ const ThankYou: NextPage = () => {
                     <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z" />
                   </svg>
                 </a>
-              </li> */}
+              </li>
             </ul>
-            <a
-              href="/"
-              className=" fs-16 b-t-h btn  border font-sb  text-center w-30 mt-4"
-              style={{ color: "white" }}
-            >
-              Back to home page{" "}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width={22}
-                height={22}
-                fill="currentColor"
-                className="bi bi-arrow-up-right"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M14 2.5a.5.5 0 0 0-.5-.5h-6a.5.5 0 0 0 0 1h4.793L2.146 13.146a.5.5 0 0 0 .708.708L13 3.707V8.5a.5.5 0 0 0 1 0v-6z"
-                />
-              </svg>
-            </a>
           </div>
         </div>
         {loading ? (
@@ -257,14 +258,21 @@ const ThankYou: NextPage = () => {
             cancelOrder={cancelOrder}
           />
         )}
+        <InvoiceModal
+          invoiceStatus={invoiceStatus}
+          setInvoiceStatus={setInvoiceStatus}
+          orderDetails={orderDetails}
+          orderItems={orderItems}
+        />
       </section>
-      {/* <section className="mt-5">
+
+      <section className="mt-5">
         <a href="#">
           <img className="w-100" src="images/advertise.png" alt="" />
         </a>
-      </section> */}
+      </section>
 
-      {/* <VisitNunchiBanner /> */}
+      <VisitNunchiBanner />
     </div>
   );
 };

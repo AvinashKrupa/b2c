@@ -114,7 +114,7 @@ const TypeSenseProductSmallBlock = (props: any) => {
               >
                 {document.description}
               </p>
-              {/* <div className="product-rating text-center">
+              <div className="product-rating text-center">
                 <span>4.6</span>
                 <ul className="list-inline">
                   <li className="list-inline-item">
@@ -133,9 +133,7 @@ const TypeSenseProductSmallBlock = (props: any) => {
                     <i className="fas fa-star-half fa-fw" />
                   </li>
                 </ul>
-              </div> */}
-              <br />
-              <br />
+              </div>
               <div className="product-price text-center">
                 <span className="less-price">
                   <i className="fas fa-indian-rupee-sign fa-fw" />{" "}
