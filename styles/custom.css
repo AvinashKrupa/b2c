@@ -184,3 +184,6 @@ input.quantity {
 footer.footer .copyright {
   padding-bottom: 121px;
 }
+.p-image-block {
+  margin-right: -15px;
+}
