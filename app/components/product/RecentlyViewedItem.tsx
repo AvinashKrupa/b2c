@@ -61,11 +61,11 @@ const RecentlyViewedItem = (props: any) => {
                         </a>
                         <a className="btn fs-13"
                             onClick={() => {
-                                if (Cart.isProductInCart(product?.getId())) {
+                                if (Cart.isProductInCart(props.id)) {
                                   route.replace(Permalink.ofCart());
                                 } else {
                                   if (LocalStorageService.getAccessToken()) {
-                                    props.addToCart(product?.getId());
+                                    props.addToCart(props.id);
                                   } else {
                                     props.setLogin(true);
                                   }
@@ -73,7 +73,7 @@ const RecentlyViewedItem = (props: any) => {
                               }}
                         >
                             {
-                                      props.cartItems?.includes(product?.getId()) || false
+                                      props.cartItems?.includes(props.id) || false
                                         ? "Go To Cart"
                                         : "Add to Cart"
                                     }
