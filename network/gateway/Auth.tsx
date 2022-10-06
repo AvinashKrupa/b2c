@@ -34,7 +34,8 @@ export class Auth extends HTTPBaseService {
             console.log("login data", response);
             let message = response.data.msg ?? "Login success";
             const { customer_id, token } = response.data.data;
-
+            const { refId } = response?.data;
+            localStorage.setItem("cartRef",refId);
             let params = {
               data: [
                 {
