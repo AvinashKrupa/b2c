@@ -1,7 +1,15 @@
-# Stage-1
-FROM node:16.1 as react-build
-WORKDIR /app
-COPY . ./
-EXPOSE 3000
-RUN npm install
-CMD ["npm", "run", "dev"]
+FROM nginx:alpine
+
+#!/bin/sh
+
+COPY ./.nginx/nginx.conf /etc/nginx/nginx.conf
+
+## Remove default nginx index page
+RUN rm -rf /usr/share/nginx/html/*
+
+# Copy from the stahg 1
+COPY /var/lib/jenkins/workspace/b2c/out /usr/share/nginx/html
+
+EXPOSE 3000 80
+
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
