@@ -59,16 +59,14 @@ const CartScreen: NextPage = () => {
   function applyCouponCode() {
     if (isValidCouponCode()) {
       let data = {
-        data: {
-          type: "promotion_item",
-          code: couponCode,
-        },
+          code: couponCode
       };
       Cart.getInstance()
         .applyCouponCode(data)
         .then((response: any) => {
           if (response.statusText === "OK") {
             setCartItems(response.data.data);
+            Toast.showSuccess("Coupon applied!!")
           }
         });
     }
@@ -105,12 +103,14 @@ const CartScreen: NextPage = () => {
               {cartItems?.length != 0 &&
                 cartItems?.map((item: any, index: number) => {
                   return (
+                    item?.type == "cart_item" ?
                     <CartItem
                       key={index}
                       {...item}
                       removeCart={removeCart}
                       getCustomerCart={getCustomerCart}
-                    />
+                    />:
+                    null
                   );
                 })}
               {!loading && cartItems?.length == 0 && (
@@ -148,9 +148,9 @@ const CartScreen: NextPage = () => {
                         <p className="fs-14 font-r text-color-2">
                           Add items worth
                           <span className="font-sb"> ₹1,800 </span> more to
-                          avail
+                          avail 
                           <span className="font-sb text-color-9">
-                            Free Shipping
+                            &nbsp;Free Shipping
                           </span>
                         </p>
                       </div>

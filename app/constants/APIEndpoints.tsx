@@ -25,7 +25,7 @@ const API = {
   GET_ALL_ADDRESS: "getAllAddresses",
   DELETE_ADDRESS: "deleteAddress",
   GET_BANNER: "banners/",
-  APPLY_PROMOTION: "applyPromotion",
+  APPLY_PROMOTION: "promotions/cart",
   GET_CUSTOMER_ORDER: "getCustomerOrder",
   ORDER: "order",
   ORDERS: "orders",
@@ -63,5 +63,7 @@ const API = {
   GET_FACET_ATTRIBUTES: 'typesense/collections/facetAttributes/',
   GET_PRODUCT_COLLECTIONS: 'typesense/collections/products/documents',
   DELETE_WISHLIST_ENTRY: 'flows/wishlist/entries/',
+  GET_PROMOTIONS: 'promotions',
+  GET_PROMOTION_CODE: 'promotions/',
 };
 export default API;

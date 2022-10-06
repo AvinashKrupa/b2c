@@ -23,11 +23,11 @@ export class Cart extends HTTPBaseService {
   }
 
   static getCartId() {
-    let cartId = localStorage.getItem("CART_ID");
+    let cartId = localStorage.getItem("cartRef");
 
     if (!cartId || cartId === 'undefined') {
       cartId = uuidv4();
-      localStorage.setItem("CART_ID", cartId);
+      localStorage.setItem("cartRef", cartId);
     }
     return cartId;
 
@@ -35,7 +35,7 @@ export class Cart extends HTTPBaseService {
 
   static async regenrateCustomerCartAssociation() {
     let cartId = uuidv4();
-    localStorage.setItem("CART_ID", cartId);
+    localStorage.setItem("cartRef", cartId);
     let params = {
       data: [
         {
@@ -121,7 +121,7 @@ export class Cart extends HTTPBaseService {
         .then((response) => {
           if (response.status == 200) {
             let message = response.data.msg ?? "";
-            localStorage.setItem("CART_ID", response.data.refId);
+            localStorage.setItem("cartRef", response.data.refId);
             let cartItems = response.data.data;
             if (cartItems) {
               let prdId: any = cartItems.map((info: any) => {
@@ -285,6 +285,46 @@ export class Cart extends HTTPBaseService {
         .then((response) => {
           if (response.status == 200) {
             let message = response.data;
+            resolve(response);
+          } else {
+            let message = response.data.message;
+            Toast.showError(message);
+            reject(response);
+          }
+        })
+        .catch((error) => {
+          Toast.showError(error.message);
+          reject(error);
+        });
+    });
+  };
+
+  public getPromotions = () => {
+    return new Promise((resolve: any, reject: any) => {
+      this.instance
+        .get(API.GET_PROMOTIONS)
+        .then((response) => {
+          if (response.status == 200) { 
+            resolve(response);
+          } else {
+            let message = response.data.message;
+            Toast.showError(message);
+            reject(response);
+          }
+        })
+        .catch((error) => {
+          Toast.showError(error.message);
+          reject(error);
+        });
+    });
+  };
+
+  public getPromotionCode = (id: string) => {
+    return new Promise((resolve: any, reject: any) => {
+      this.instance
+        .get(API.GET_PROMOTION_CODE+id)
+        .then((response) => {
+          if (response.status == 200) { 
             resolve(response);
           } else {
             let message = response.data.message;

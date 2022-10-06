@@ -85,7 +85,6 @@ class LocalStorageService {
     localStorage.removeItem("customer_wishlist");
     localStorage.removeItem("customer_cart_items");
     localStorage.removeItem("cartRef");
-    localStorage.removeItem("CART_ID");
     localStorage.removeItem("hashToken");
     localStorage.removeItem("customer_id");
     localStorage.removeItem("accessToken");

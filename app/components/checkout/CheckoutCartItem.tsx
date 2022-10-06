@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { TbCurrencyRupee } from "react-icons/tb";
 import { Cart } from "../../../network/gateway/Cart";
 import { Wishlist } from "../../../network/gateway/Wishlist";
@@ -5,6 +6,21 @@ import Permalink from "../../../utils/Permalink";
 import Toast from "../../../utils/Toast";
 
 const CheckoutCartItem = (props: any) => {
+
+  const [discount, setDiscount] = useState<number>(0);
+  const [cartTotal, setCartTotal] = useState<number>(0);
+  useEffect( () => {
+    let discountValue: number = 0;
+    let doCartTotal: number = 0;
+    props?.cartItems?.map( (item: any) => {
+      discountValue += parseInt(item?.meta?.display_price?.discount?.value?.amount);      
+      doCartTotal += parseInt(item?.meta?.display_price?.without_discount?.value?.amount);      
+    })
+    setDiscount(discountValue*-1);
+    setCartTotal(doCartTotal);
+    return () => {}
+  }, [props.cartItems]);
+
   function getSize(item: any) {
     let data = item?.meta?.variant?.filter((info: any) => {
       return info.name == "Size";
@@ -44,6 +60,7 @@ const CheckoutCartItem = (props: any) => {
   }
 
   function ItemLoop(item: any) {
+
     function handleChange(e: any, id: string) {
       e.preventDefault();
 
@@ -122,7 +139,7 @@ const CheckoutCartItem = (props: any) => {
           </div>
           <div className="d-flex pb-3">
             <p className="fs-14 font-sb text-color-1">
-              Total: <span className="text-color-2">{item.value.amount}</span>
+              Total: <span className="text-color-2">{item?.meta?.display_price?.without_discount?.value.amount}</span>
             </p>
           </div>
           <div className="d-flex mt-4 mb-4">
@@ -148,38 +165,39 @@ const CheckoutCartItem = (props: any) => {
       </div>
     );
   }
+
+
   return (
     <div>
       {props.cartItems?.length != 0 && (
         <div className="bgbar position-relative mt-4 ms-0 ">
           {props.cartItems?.length != 0 &&
-            props.cartItems?.map((item: any, index: number) => {
-              return ItemLoop(item);
+            props.cartItems?.map((item: any, index: number) => {              
+              return item?.type == "cart_item" ? ItemLoop(item): null;
             })}
 
           <ul>
             <li className="fs-14 font-r text-color-1 d-flex mb-3">
               Delivery Charges (express)
-              <small className="text-color-2 text-end ms-auto">+ 100</small>
+              <small className="text-color-2 text-end ms-auto">+ 00</small>
             </li>
             <li className="fs-14 font-r text-color-1 d-flex  mb-3">
-              CGST + SGST ()
-              <small className="text-color-2 text-end ms-auto"></small>
+              CGST + SGST (0%)
+              <small className="text-color-2 text-end ms-auto">+ 00</small>
             </li>
             <li className="fs-14 font-r text-color-1 d-flex  mb-3">
               Discount
-              <small className="text-end ms-auto  green"></small>
+              <small className="text-end ms-auto  green">- {discount ?? "00"}</small>
             </li>
           </ul>
           <hr />
           <ul>
             <li className="fs-19 font-sb text-color-2 d-flex mb-3">
               Grand Total:{" "}
-              <span className="ms-2">
+              <small className="text-color-2 text-end ms-auto">
                 <TbCurrencyRupee />
-                {props.grandTotal}
-              </span>
-              <small className="text-color-2  text-end ms-auto"></small>
+                {(cartTotal-discount)}
+              </small>
             </li>
           </ul>
         </div>
