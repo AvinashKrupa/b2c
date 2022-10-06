@@ -160,26 +160,25 @@ const CheckoutCartItem = (props: any) => {
           <ul>
             <li className="fs-14 font-r text-color-1 d-flex mb-3">
               Delivery Charges (express)
-              <small className="text-color-2 text-end ms-auto">+ 100</small>
+              <small className="text-color-2 text-end ms-auto">+ 00</small>
             </li>
             <li className="fs-14 font-r text-color-1 d-flex  mb-3">
-              CGST + SGST ()
-              <small className="text-color-2 text-end ms-auto"></small>
+              CGST + SGST (0%)
+              <small className="text-color-2 text-end ms-auto">+ 00</small>
             </li>
             <li className="fs-14 font-r text-color-1 d-flex  mb-3">
               Discount
-              <small className="text-end ms-auto  green"></small>
+              <small className="text-end ms-auto  green">{props?.meta?.display_price?.discount?.value ?? "- 00"}</small>
             </li>
           </ul>
           <hr />
           <ul>
             <li className="fs-19 font-sb text-color-2 d-flex mb-3">
               Grand Total:{" "}
-              <span className="ms-2">
+              <small className="text-color-2 text-end ms-auto">
                 <TbCurrencyRupee />
                 {props.grandTotal}
-              </span>
-              <small className="text-color-2  text-end ms-auto"></small>
+              </small>
             </li>
           </ul>
         </div>

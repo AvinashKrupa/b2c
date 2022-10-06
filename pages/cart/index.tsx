@@ -59,16 +59,14 @@ const CartScreen: NextPage = () => {
   function applyCouponCode() {
     if (isValidCouponCode()) {
       let data = {
-        data: {
-          type: "promotion_item",
-          code: couponCode,
-        },
+          code: couponCode
       };
       Cart.getInstance()
         .applyCouponCode(data)
         .then((response: any) => {
           if (response.statusText === "OK") {
             setCartItems(response.data.data);
+            Toast.showSuccess("Coupon applied!!")
           }
         });
     }

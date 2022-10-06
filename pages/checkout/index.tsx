@@ -323,7 +323,9 @@ const CheckoutScreen: NextPage = (props: any) => {
                   getCustomerCart={getCustomerCart}
                   setCartItems={setCartItems}
                 />
-                <PromoCode />
+                <PromoCode 
+                  setCartItems={setCartItems}
+                />
               </div>
             )}
           </div>

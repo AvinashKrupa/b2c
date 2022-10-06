@@ -16,14 +16,14 @@ const CartItem = (props: any) => {
 
   function getColor() {
     console.log("props.meta", wishItems);
-    let data = props.meta?.variant.filter((info: any) => {
+    let data = props.meta?.variant?.filter((info: any) => {
       return info.name == "Color";
     });
     if (data && data.length > 0) return data[0].options?.name;
   }
 
   function getSize() {
-    let data = props.meta?.variant.filter((info: any) => {
+    let data = props.meta?.variant?.filter((info: any) => {
       return info.name == "Size";
     });
 
@@ -148,7 +148,7 @@ const CartItem = (props: any) => {
                       {/* <span>
                         ₹{props?.discountPrice?.currencies.INR.amount}{" "}
                       </span> */}
-                      <span>₹{props?.value.amount} </span>
+                      <span>₹{props?.unit_price?.amount} </span>
                     </span>
                     {/* <span className="last-price mb-0 fs-12 font-r">
                       <span className="text-color-1">
