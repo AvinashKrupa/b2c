@@ -299,4 +299,44 @@ export class Cart extends HTTPBaseService {
     });
   };
 
+  public getPromotions = () => {
+    return new Promise((resolve: any, reject: any) => {
+      this.instance
+        .get(API.GET_PROMOTIONS)
+        .then((response) => {
+          if (response.status == 200) { 
+            resolve(response);
+          } else {
+            let message = response.data.message;
+            Toast.showError(message);
+            reject(response);
+          }
+        })
+        .catch((error) => {
+          Toast.showError(error.message);
+          reject(error);
+        });
+    });
+  };
+
+  public getPromotionCode = (id: string) => {
+    return new Promise((resolve: any, reject: any) => {
+      this.instance
+        .get(API.GET_PROMOTION_CODE+id)
+        .then((response) => {
+          if (response.status == 200) { 
+            resolve(response);
+          } else {
+            let message = response.data.message;
+            Toast.showError(message);
+            reject(response);
+          }
+        })
+        .catch((error) => {
+          Toast.showError(error.message);
+          reject(error);
+        });
+    });
+  };
+
 }
