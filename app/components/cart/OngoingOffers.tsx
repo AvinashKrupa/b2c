@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Cart } from "../../../network/gateway/Cart";
-import OfferCard from "../cart/OfferCard";
+import PromotionCard from "../cart/PromotionCard";
 
 const OngoingOffers = () => {
 
@@ -29,7 +29,7 @@ const OngoingOffers = () => {
           {
             offers?.map((item: any, index: number) => {
               return (
-                <OfferCard key={index} {...item}/>
+                <PromotionCard key={index} {...item}/>
               )
             })
           }

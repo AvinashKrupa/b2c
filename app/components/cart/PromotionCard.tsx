@@ -1,13 +1,15 @@
-const OfferCard = (props: any) => {
+const PromotionCard = (props: any) => {
+
+    const 
     return (
-        <div className="position-relative">
+        <div className="position-relative mt-4">
             <a href="#">
                 <img className="w-100" src="images/card-1.png" alt="" />
                 <div className="carddata align-items-start d-flex flex-column h-100 justify-content-between w-100 ">
                     <div>
                         <h4 className="fs-24 font-sb text-white">Upto 20% off</h4>
                         <p className="fs-16 font-r text-color-8">
-                            on selected brands
+                            {props?.name}
                         </p>
                     </div>
                     <div className="d-flex w-100">
@@ -25,4 +27,4 @@ const OfferCard = (props: any) => {
     )
 }
 
-export default OfferCard;
+export default PromotionCard;
