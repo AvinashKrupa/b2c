@@ -14,6 +14,7 @@ const Logout = (props: any) => {
     props.setIsShowing(false);
     isRemoveUserInfo(false);
     useCartStore.setState({ count: false, cartItems: [] });
+    localStorage.clear();
     router.replace(Permalink.ofHomePage())
   };
   return (
@@ -45,6 +46,9 @@ const Logout = (props: any) => {
       </div>
       <div className="modal-body"> Are you sure you want to logout?</div>
       <div className="modal-footer">
+        <a className="btn btn-danger fs-13 p-2" onClick={()=> (props.setIsShowing(false))}>
+          No
+        </a>
         <a className="btn fs-13 p-2" onClick={logout}>
           Yes
         </a>

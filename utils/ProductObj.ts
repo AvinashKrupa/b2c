@@ -81,12 +81,10 @@ export default class ProductObj {
         let idObj = Object.keys(this.data?.meta.variation_matrix);
 
         for (let i = 0; i < idObj.length; i++) {
-            //size
+            //size            
             if (idObj[i] == this.selectCombination?.size) {
                 let innerObj = this.data?.meta.variation_matrix[idObj[i]];
                 let innerObjKeys = Object.keys(innerObj);
-
-                console.log("TEJPAL-HinnerObjKeys", innerObjKeys);
                 for (let j = 0; j < innerObjKeys.length; j++) {
                     //color
 
@@ -97,11 +95,30 @@ export default class ProductObj {
                             size: idObj[i],
                             id: innerObj[innerObjKeys[j]],
                         })
-                        this.getProductDetail(innerObj[innerObjKeys[j]])                        
+                        //this.getProductDetail(innerObj[innerObjKeys[j]])
                     }
                 }
             }
-        }        
+        }
+    }
+    changeVariantBySize(id: string) {
+        let idObj = Object.keys(this.data.meta.variation_matrix);
+
+        for (let i = 0; i < idObj.length; i++) {
+            
+            if (idObj[i] == id) {
+                //size
+                let innerObj = this.data.meta.variation_matrix[idObj[i]];
+                let innerObjKeys = Object.keys(innerObj);
+                //color
+                this.setSelectCombination({
+                    color: innerObjKeys[0],
+                    size: idObj[i],
+                    id: innerObj[innerObjKeys[0]],
+                })
+                //this.getProductDetail(innerObj[innerObjKeys[0]])
+            }
+        }
     }
     getProductDetail(id: any) {
         CatalogService.getInstance()

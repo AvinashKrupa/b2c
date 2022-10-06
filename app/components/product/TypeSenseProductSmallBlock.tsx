@@ -11,81 +11,99 @@ import useWishlistStore from "../../../zustand/wishlist";
 
 const TypeSenseProductSmallBlock = (props: any) => {
   const { document } = props;
-  const [discount, setDiscount] = useState<number>(0)
+  const [discount, setDiscount] = useState<number>(0);
   const [cartView, setCartView] = useState(false);
   const cartItems = useCartStore((state: any) => state.cartItems);
   const wishItems = useWishlistStore((state: any) => state.wishlistItems);
   const router = useRouter();
   useEffect(() => {
-    getOffPercent()
-    return () => { }
-  }, [])
+    getOffPercent();
+    return () => {};
+  }, []);
   function randomIntFromInterval(min: number, max: number) {
     // min and max included
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
   const getOffPercent = () => {
     let price = document.original_price;
-    let salePrice = document.sale_price
-    setDiscount(Math.floor((price - salePrice) / price * 100))
-  }
+    let salePrice = document.sale_price;
+    setDiscount(Math.floor(((price - salePrice) / price) * 100));
+  };
 
-  console.log("this is document", props)
   return (
     <div className="col-xl-6">
       {document.exploreBlock && <ExploreBlock />}
       <div
         className={"product-block bg-" + randomIntFromInterval(1, 6)}
-      // style={{ background: "antiquewhite" }}
+        // style={{ background: "antiquewhite" }}
       >
         {document.spinBlock && <SpinBlock />}
         <div className="row g-0">
           <div className="col-sm-7">
             <div className="product-image position-relative">
               {document?.main_image ? (
-                <a onClick={() => router.replace(Permalink.ofProduct(document))}>
+                <a
+                  onClick={() => router.replace(Permalink.ofProduct(document))}
+                >
                   <img src={document.main_image} className="img-fluid" />
                 </a>
-              ) :
-                <a onClick={() => router.replace(Permalink.ofProduct(document))}>
+              ) : (
+                <a
+                  onClick={() => router.replace(Permalink.ofProduct(document))}
+                >
                   <img src="/images/no-image.png" className="img-fluid" />
                 </a>
-              }
+              )}
               <button type="button" className="btn-voice">
                 <i className="fas fa-volume-high fa-fw" />
               </button>
-              {!wishItems?.includes(document.product_id) ? <button
-                onClick={() => {
-                  props.addToWishList(document.product_id);
-                  setCartView(true);
-                }}
-                type="button"
-                className="btn-heart"
-              >
-                {/* <i
+              {!wishItems?.includes(document.product_id) ? (
+                <button
+                  onClick={() => {
+                    props.addToWishList(document.product_id);
+                    setCartView(true);
+                  }}
+                  type="button"
+                  className="btn-heart"
+                >
+                  {/* <i
                   className={`far fa-heart fa-fw ${
                     Wishlist.isWishlistProduct(document.product_id) ? "active" : ""
                   }`}
                 /> */}
-                <i className="far fa-heart fa-fw"></i>
-              </button> : <div className="product-block-1 mb-5">
-                <button type="button" className="btn-heart mb-5" style={{right:12}} onClick={() => {document.onDeletwishlistItem(document.product_id) }}><i className=" far fa-heart fa-fw "></i></button>
-              </div>}
+                  <i className="far fa-heart fa-fw"></i>
+                </button>
+              ) : (
+                <div className="product-block-1 mb-5">
+                  <button
+                    type="button"
+                    className="btn-heart mb-5"
+                    style={{ right: 12 }}
+                    onClick={() => {
+                      document.onDeletwishlistItem(document.product_id);
+                    }}
+                  >
+                    <i className=" far fa-heart fa-fw "></i>
+                  </button>
+                </div>
+              )}
               <span className="img-name">{document.material}</span>
             </div>
-            {
-              document.price_difference > 0 && (
-                <div className="discountBar text-white">
-                  <h4 className="fs-16 font-sb">{discount}% Discount</h4>
-                  <p className="fs-13 font-r">22 : 38 : 18</p>
-                </div>
-              )
-            }
+            {document.price_difference > 0 && (
+              <div className="discountBar text-white">
+                <h4 className="fs-16 font-sb">{discount}% Discount</h4>
+                <p className="fs-13 font-r">22 : 38 : 18</p>
+              </div>
+            )}
           </div>
           <div className="col-sm-5">
             <div className="product-content-area">
               <h6>
-                <a onClick={() => router.replace(Permalink.ofProduct(document))}>{document.name}</a>
+                <a
+                  onClick={() => router.replace(Permalink.ofProduct(document))}
+                >
+                  {document.name}
+                </a>
               </h6>
               <p
                 style={{

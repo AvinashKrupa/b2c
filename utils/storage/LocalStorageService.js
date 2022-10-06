@@ -101,5 +101,28 @@ class LocalStorageService {
     }
     return cartRef;
   }
+
+  static setRecentItem(id) {
+    let recent_items = this.getRecentItems();
+    console.log(recent_items)
+    if(recent_items?.length>7){
+      recent_items.slice(0,1)
+    }
+    if(recent_items.includes(id) == false){
+      recent_items.push(id);
+      localStorage.setItem("recent_items", JSON.stringify(recent_items));
+    }  
+  }
+  static getRecentItems() {
+    let data = localStorage.getItem("recent_items");
+    if (data) {
+      return JSON.parse(data);
+    } else {
+      return [];
+    }
+  }
+  static clearRecentItems(){
+    localStorage.removeItem("recent_items");
+  }
 }
 export default LocalStorageService;

@@ -91,11 +91,14 @@ const OrderHistoryScreen: NextPage = () => {
                           </svg>
                         </a>
                       </div>
+                      <br/>
+                      <br/>
+                      <br/>
                       <form className="user-form">
                         <div className="row">
                           <div className="col-12 col-lg-10 col-xl-7">
                             <div className="row">
-                              <div className="col-12 col-sm-6">
+                              <div className="col-12 col-sm-4">
                                 <div className="form-group">
                                   <label>Name</label>
                                   <input
@@ -116,7 +119,7 @@ const OrderHistoryScreen: NextPage = () => {
                                   />
                                 </div>
                               </div>
-                              <div className="col-12 col-sm-6">
+                              <div className="col-12 col-sm-4">
                                 <div className="form-group">
                                   <label>E-mail</label>
                                   <input
@@ -137,7 +140,7 @@ const OrderHistoryScreen: NextPage = () => {
                                   />
                                 </div>
                               </div>
-                              <div className="col-12 col-sm-6 mb-5">
+                              <div className="col-12 col-sm-4">
                                 <div className="form-group">
                                   <label>Mobile Number</label>
                                   <input

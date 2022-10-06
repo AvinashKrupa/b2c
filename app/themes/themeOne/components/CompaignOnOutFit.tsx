@@ -24,21 +24,21 @@ const CompaignOnOutFit = (props: iProps) => {
                   return (
                     <a onClick={() => router.replace(Permalink.ofProduct(item))} key={index}>
                       <div className="thumb position-relative text-center" >
-                        <Image 
-                          className="w-100" 
-                          src={item.image} 
-                          alt="" 
-                          style={{ objectFit: "contain" }} 
+                        <Image
+                          className="w-100"
+                          src={item.image}
+                          alt=""
+                          style={{ objectFit: "contain" }}
                           width={330}
                           height={423}
                         />
                         <div className="overlay text-start">
-                          {item.height && <p className="fs-22 font-r">
+                          {/* {item.height && <p className="fs-22 font-r">
                             Height<span className="font-sb ms-3">{item.height}</span>
                           </p>}
                           {item.weight && <p className="fs-22 font-r">
                             Weight<span className="font-sb ms-3">{item.weight}</span>
-                          </p>}
+                          </p>} */}
                           {item.size && <p className="fs-22 font-r">
                             Size<span className="font-sb ms-3">{item.size}</span>
                           </p>}

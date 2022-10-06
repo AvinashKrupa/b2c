@@ -251,7 +251,7 @@ const ThemeOne: NextPage = () => {
 
       />
       {/* Must haves In Your Wardrobe section */}
-      <MustInWardrobe />
+      {/* <MustInWardrobe /> */}
       <div className="wrapper">
         {/* Shop By Price */}
         <ShopByPrice />
@@ -382,9 +382,6 @@ const ThemeOne: NextPage = () => {
       {/* Footer */}
       <Footer />
       {/* End Footer */}
-      {/* Fixed Button */}
-      <FooterFixedButton />
-      {/* End Fixed Button */}
     </div>
   );
 };

@@ -91,13 +91,13 @@ const NavTatvaTopPicks = (props: iProps) => {
                               tabIndex={0} >
                               <img src="/images/wishlist-detail.png" />
                             </a>}
-
+{/*
                             <a href="#" className="d-block  mb-5" tabIndex={0}>
                               <img src="/images/volume.png" />
                             </a>
                             <a href="#" className="d-block  mb-5" tabIndex={0}>
                               <img src="/images/swap.png" />
-                            </a>
+                            </a> */}
                           </div>
                         </div>
                       </div>

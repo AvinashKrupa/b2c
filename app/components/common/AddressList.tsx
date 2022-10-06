@@ -3,10 +3,7 @@ import { Modal } from "react-bootstrap";
 import { useRouter } from "next/router";
 import { AiFillDelete } from "react-icons/ai";
 
-
-
-const AddressList = (props:any) => {
-
+const AddressList = (props: any) => {
   const router = useRouter();
   return (
     <Modal
@@ -66,20 +63,27 @@ const AddressList = (props:any) => {
                             <div className="media">
                               <div className="mr-3">
                                 <i className="icofont-location-pin icofont-3x"></i>
-                               <div style={{textAlign:'end',fontSize:25,cursor:'pointer'}} onClick={()=>{props?.deleteAddress(info.id,index)
-
-                               }}> <AiFillDelete/>  </div>
+                                <div
+                                  style={{
+                                    textAlign: "end",
+                                    fontSize: 25,
+                                    cursor: "pointer",
+                                  }}
+                                  onClick={() => {
+                                    props?.deleteAddress(info.id, index);
+                                  }}
+                                >
+                                  {" "}
+                                  <AiFillDelete />{" "}
+                                </div>
                               </div>
                               <div className="media-body">
                                 <h6 className="mb-1">{info.first_name}</h6>
 
                                 <h6 className="mb-1">{info.city}</h6>
 
-
                                 <h6 className="mb-1">{info.postcode}</h6>
                                 <h6 className="mb-1">{info.country}</h6>
-
-
                               </div>
                             </div>
                           </div>
@@ -87,7 +91,9 @@ const AddressList = (props:any) => {
                             <button
                               type="button"
                               className="btn btn-sm m-4 mt-md-0"
-                              onClick={() => { props.onSelect(index) }}
+                              onClick={() => {
+                                props.onSelect(index);
+                              }}
                             >
                               Select
                             </button>

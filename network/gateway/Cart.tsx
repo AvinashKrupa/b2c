@@ -277,4 +277,26 @@ export class Cart extends HTTPBaseService {
         });
     });
   };
+
+  public updateCartQuantity = (id: any,data:any) => {
+    return new Promise((resolve: any, reject: any) => {
+      this.instance
+        .put(API.DELETE_CART_ITEM + Cart.getCartId() + "/items/" + id,data)
+        .then((response) => {
+          if (response.status == 200) {
+            let message = response.data;
+            resolve(response);
+          } else {
+            let message = response.data.message;
+            Toast.showError(message);
+            reject(response);
+          }
+        })
+        .catch((error) => {
+          Toast.showError(error.message);
+          reject(error);
+        });
+    });
+  };
+
 }

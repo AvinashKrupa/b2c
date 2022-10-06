@@ -42,11 +42,13 @@ const ProductDetailScreen: NextPage = () => {
   ];
   const [sizeValues, setSizeValues] = useState<any>(initSizeValues);
   const [colorPopup, setColorPopup] = useState<boolean>(false)
+  const [recentlyViewedItems, setRecentlyViewedItems] = useState<any>([])
 
   useEffect(() => {
     if (id) {
       getProductDetail(id);
     }
+    setRecentlyViewedItems(LocalStorageService.getRecentItems())
     return () => { };
   }, [id]);
 
@@ -58,6 +60,9 @@ const ProductDetailScreen: NextPage = () => {
           if (response.data) {
             setProduct(new ProductObj(response?.data?.data));
             setLoading(false)
+            if(product?.getId()){
+              LocalStorageService.setRecentItem(product?.getId())
+            }            
           } else {
             console.log("ERROR:", response.data);
           }
@@ -66,14 +71,31 @@ const ProductDetailScreen: NextPage = () => {
     }
   }
 
-  const handleSizeChange = (i: number, e: any) => {
-    let newSizeValues: any = [...sizeValues];
-    newSizeValues[i][e.target.name] = e.target.value;
+  const handleSizeChange = (i: number, name: any, value: any) => {
+    let newSizeValues: any = [...sizeValues]; 
+    newSizeValues[i][name] = value;
     setSizeValues(newSizeValues);
     let selectCombination: any = product?.selectCombination;
-    selectCombination.size = e.target.value;
+    selectCombination.size = value;
     product?.setSelectCombination(selectCombination);
+  };
+  
+  const handleSize = (i: number, name: any, value: any) => {
+   
+    let selectCombination: any = product?.selectCombination;
+    selectCombination.size = value;
+    product?.setSelectCombination(selectCombination);    
+    getProductDetail(
+      product?.selectCombination.id
+    ); 
+    product?.changeVariantBySize(value);
+  };
 
+  const handleColor = (i: number, name: any, value: any) => {
+   
+    let selectCombination: any = product?.selectCombination;
+    selectCombination.color = value;
+    product?.setSelectCombination(selectCombination);
   };
 
   const addSizeFields = () => {
@@ -131,6 +153,7 @@ const ProductDetailScreen: NextPage = () => {
       });
   }
 
+
   return (
     <>
       <div className="product-detail-page">
@@ -152,9 +175,9 @@ const ProductDetailScreen: NextPage = () => {
                             <h4 className="fs-16 font-sb">
                               {product?.getOffPercent()}% Discount
                             </h4>
-                            <p className="fs-13 font-r">22 : 38 : 18</p>
+                            <p className="fs-13 font-r">22:38:18</p>
                           </div>
-                          <div className="offtype mt-5">
+                           <div className="offtype mt-5">
                             <a href="#">
                               <img
                                 className="me-2 d-inline-block"
@@ -238,6 +261,38 @@ const ProductDetailScreen: NextPage = () => {
                             <p className="fs-20 font-r text-color-2 mt-2">
                               {product?.getShortDescription()}
                             </p>
+                            <div>
+                              <p className="fs-12 font-r text-color-1 mt-5 mb-3">
+                                Size available
+                              </p>
+                              <ul className="size d-flex">
+                                {product?.getSizes().map((info: any, index: number) => {
+                                  if (product?.selectCombination.size == info.id) {
+                                    return (
+                                      <li
+                                        key={index}
+                                        className="select"
+                                      >
+                                        {info.name}
+                                      </li>
+                                    );
+                                  } else {
+                                    return (
+                                      <li
+                                        key={index}
+                                        onClick={() => {     
+                                          handleSize(index, "size", info.id)                            
+                                                                                  
+                                        }}
+                                        className="available"
+                                      >
+                                        {info.name}
+                                      </li>
+                                    );
+                                  }
+                                })}
+                              </ul>
+                            </div>
                             <div className="custom-radios">
                               <p className="fs-14 font-r text-color-1 mt-4 mb-3">
                                 Colours Available
@@ -267,7 +322,7 @@ const ProductDetailScreen: NextPage = () => {
                                         <span
                                           style={{ background: item.description }}
                                         >
-                                          <div title={item.name} />
+                                          {/* <div title={item.name} /> */}
                                         </span>
                                       </label>
                                     </div>
@@ -312,7 +367,6 @@ const ProductDetailScreen: NextPage = () => {
                                 </div>
 
                                 <table className="table cart-table">
-
                                   <tbody>
                                     {sizeValues.map(
                                       (element: any, index: number) => (
@@ -321,8 +375,9 @@ const ProductDetailScreen: NextPage = () => {
                                             <span>Size</span>
                                             <select
                                               className="form-select"
+                                              name="size"
                                               onChange={(e) =>
-                                                handleSizeChange(index, e)
+                                                handleSizeChange(index, e.target.name, e.target.value)
                                               }
                                             >
                                               {product
@@ -333,9 +388,6 @@ const ProductDetailScreen: NextPage = () => {
                                                       <option
                                                         key={index}
                                                         value={item.id}
-                                                        selected={
-                                                          item == element.id
-                                                        }
                                                       >
                                                         {item.name}
                                                       </option>
@@ -348,8 +400,9 @@ const ProductDetailScreen: NextPage = () => {
                                             <span>Qty</span>
                                             <select
                                               className="form-select"
+                                              name="qty"
                                               onChange={(e) =>
-                                                handleSizeChange(index, e)
+                                                handleSizeChange(index, e.target.name, e.target.value)
                                               }
                                             >
                                               {product
@@ -360,9 +413,6 @@ const ProductDetailScreen: NextPage = () => {
                                                       <option
                                                         key={index}
                                                         value={item}
-                                                        selected={
-                                                          item == element.qty
-                                                        }
                                                       >
                                                         {item}
                                                       </option>
@@ -381,12 +431,11 @@ const ProductDetailScreen: NextPage = () => {
                                                 <input
                                                   type="radio"
                                                   id="color-3"
-                                                  name={"color-" + element.color}
-                                                  defaultValue="color-3"
+                                                  name={"color"}
                                                   defaultChecked
                                                   tabIndex={0}
                                                   onChange={(e) =>
-                                                    handleSizeChange(index, e)
+                                                    handleSizeChange(index, e.target.name, e.target.value)
                                                   }
                                                   value={element.color}
                                                   onClick={() => {
@@ -406,7 +455,6 @@ const ProductDetailScreen: NextPage = () => {
                                       )
                                     )}
                                   </tbody>
-
                                 </table>
                               </div>
                               <div className="text-center mb-4">
@@ -420,7 +468,7 @@ const ProductDetailScreen: NextPage = () => {
                                 </button>
                               </div>
                             </div>
-                            <a
+                             <a
                               href="#"
                               className="avail mt-4"
                               title="Add 20 more units in Size 36 to avail discounts"
@@ -442,7 +490,7 @@ const ProductDetailScreen: NextPage = () => {
                         </div>
                       </div>
                     </div>
-                    {/**<DetailSecondProduct/>*/}
+                    <DetailSecondProduct/>
                   </Slider>
                 </div>
               </section>
@@ -450,6 +498,9 @@ const ProductDetailScreen: NextPage = () => {
           }
         </div>
         <div className="m-bg position-relative">
+          <br />
+          <br />
+          <br />
           <div className="wrapper">
             {
               product && (
@@ -463,7 +514,7 @@ const ProductDetailScreen: NextPage = () => {
                     >
                       <li className="nav-item" role="presentation">
                         <button
-                          className={`nav-link font-sb bg-1 ${selectedSection == 1 ? "active" : ""
+                          className={`nav-link font-sb bg-1 mt-3 ${selectedSection == 1 ? "active" : ""
                             }`}
                           id="home-tab"
                           data-bs-toggle="tab"
@@ -1172,13 +1223,33 @@ const ProductDetailScreen: NextPage = () => {
               )
             }
             {/* Similar Products */}
-            <DetailSimilarProducts />
+            { product && <DetailSimilarProducts 
+              name={product?.getName()} 
+              addToCart={addToCart} 
+              addToWishList={addToWishList}
+              deleteFromWishlist={deleteFromWishlist}
+              cartItems={cartItems}
+              setLogin={setLogin}
+            />}
             {/* End Similar Products */}
             {/* Upsell Cross sell */}
-            <DetailUpsellCrossSell />
+            <DetailUpsellCrossSell 
+              addToCart={addToCart} 
+              addToWishList={addToWishList}
+              deleteFromWishlist={deleteFromWishlist}
+              cartItems={cartItems}
+              setLogin={setLogin}
+            />
             {/* End Upsell Cross sell */}
             {/* Recently Viewed */}
-            <DetailRecentlyViewed />
+            {recentlyViewedItems?.length>0 && <DetailRecentlyViewed 
+              items={recentlyViewedItems} 
+              addToCart={addToCart} 
+              addToWishList={addToWishList}
+              deleteFromWishlist={deleteFromWishlist}
+              cartItems={cartItems}
+              setLogin={setLogin}
+            />}
             {/* End Recently Viewed */}
           </div>
           <Footer />
@@ -1208,16 +1279,15 @@ const ProductDetailScreen: NextPage = () => {
                     <a className="product-block">
                       <button
                         onClick={() => {
-                          if(Wishlist.isWishlistProduct(product.getId())){
+                          if (Wishlist.isWishlistProduct(product.getId())) {
                             deleteFromWishlist(product.getId())
-                          }else{
+                          } else {
                             addToWishList(product.getId())
                           }
                         }}
                         type="button"
-                        className={`btn-heart ${
-                          Wishlist.isWishlistProduct(product.getId()) ? "active" : ""
-                        }`}
+                        className={`btn-heart ${Wishlist.isWishlistProduct(product.getId()) ? "active" : ""
+                          }`}
                       >
                         <i
                           className={`far fa-heart fa-fw`}
@@ -1228,13 +1298,15 @@ const ProductDetailScreen: NextPage = () => {
                       href="#"
                       className="btn-border fs-20 me-2 d-none d-lg-inline-block"
                     >
-                      Request Semple
+                      Request Sample
                     </a>
+
                     <a href="#" className="btn-border fs-20 me-2 d-lg-none">
                       Wishlist
                     </a>
                     <a
                       className="btn fs-20"
+                      style={{ marginLeft: "200px" }}
                       onClick={() => {
                         if (Cart.isProductInCart(product.getId())) {
                           router.replace(Permalink.ofCart());

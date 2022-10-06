@@ -28,14 +28,14 @@ const Header = () => {
   useEffect(() => { }, [isLogin]);
 
   return (
-    <>
+    <div className="align-self-center">
       <Logout isShowing={isShowing} setIsShowing={setIsShowing} />
       <header className="main-header header-main">
         <div className="row">
           <div className="col-3 col-lg-1 align-self-center">
-            <a onClick={() => router.replace(Permalink.ofHomePage())}>            
-              <Image
-                src={LogoImg}
+            <a onClick={() => router.replace(Permalink.ofHomePage())}>
+              <img
+                src="/images/logo.png"
                 alt="logo"
                 className="img-fluid desk-logo"
                 width={88}
@@ -65,7 +65,7 @@ const Header = () => {
               </span>
             </a>
             <div
-              className="header-search input-group ms-auto d-none d-md-block"
+              className="header-search input-group ms-auto d-none d-md-block mt-2"
               data-bs-toggle="modal"
               data-bs-target="#searchPopup"
             >
@@ -84,9 +84,9 @@ const Header = () => {
               </span>
               <input
                 type="text"
-                className="form-control fs-16"
-                placeholder="Kurtis"
-                aria-label="Kurtis"
+                className="form-control fs-12"
+                placeholder="Find clothing from over 500+ categories..."
+                aria-label=""
                 aria-describedby="addon-wrapping"
                 onClick={(event) => {
                   event.preventDefault();
@@ -106,7 +106,7 @@ const Header = () => {
         openSearchBox={openSearchBox}
         setOpenSearchBox={setOpenSearchBox}
       />
-    </>
+    </ div>
   );
 };
 
