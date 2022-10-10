@@ -1,4 +1,4 @@
-FROM nginx:alpine
+FROM nginx
 
 COPY /var/lib/jenkins/workspace/b2c/out/* /usr/share/nginx/html
 
