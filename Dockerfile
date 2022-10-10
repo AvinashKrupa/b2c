@@ -4,7 +4,7 @@ FROM nginx:alpine
 RUN rm -rf /usr/share/nginx/html/*
 
 # Copy from the stahg 1
-COPY /var/lib/jenkins/workspace/b2c/out /usr/share/nginx/html
+COPY /var/lib/jenkins/workspace/b2c/out/ /usr/share/nginx/html
 
 EXPOSE 3000 80
 
