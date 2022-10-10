@@ -1,6 +1,6 @@
 FROM nginx:alpine
 
-COPY . /usr/share/nginx/html
+COPY /var/lib/jenkins/workspace/b2c/out/* /usr/share/nginx/html
 
 EXPOSE 80
 
