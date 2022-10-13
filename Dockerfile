@@ -22,7 +22,7 @@ COPY --from=react-build /app/out /usr/share/nginx/html
 
 COPY nginx.conf /etc/nginx/
 
-EXPOSE 8090
+EXPOSE 80 8090
 
 
 CMD ["nginx"]
