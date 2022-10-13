@@ -1,5 +1,4 @@
-
-FROM node:10 ad builder
+FROM node:10 as builder
 
 WORKDIR /app
 
