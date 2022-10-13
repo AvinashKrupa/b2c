@@ -1,4 +1,4 @@
-FROM node:10 as builder
+FROM node:10 AS builder
 
 WORKDIR /app
 
@@ -15,9 +15,9 @@ FROM nginx:alpine
 WORKDIR /usr/share/nginx/html
 
 
-COPY--from=builder /app/build .
+COPY --from=builder /app/build .
 
 EXPOSE 80
 
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["nginx"]
