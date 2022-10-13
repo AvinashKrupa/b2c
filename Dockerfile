@@ -17,7 +17,7 @@ FROM nginx:alpine
 WORKDIR /usr/share/nginx/html
 
 
-COPY --from=builder /app/build .
+COPY --from=react-build /app/build .
 
 EXPOSE 80
 
