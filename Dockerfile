@@ -14,5 +14,5 @@ FROM httpd:2.4
 
 COPY --from=react-build /app/out/* /usr/local/apache2/htdocs/
 
-EXPOSE 3000
+EXPOSE 80 3000 
 
