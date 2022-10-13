@@ -1,4 +1,4 @@
-FROM node:10 AS builder
+FROM node:16.1 as react-build
 
 WORKDIR /app
 
