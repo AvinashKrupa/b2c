@@ -10,19 +10,9 @@ RUN npm install
 
 RUN npm run build
 
+FROM httpd:2.4
 
-FROM nginx:alpine
+COPY --from=react-build /app/out/* /usr/local/apache2/htdocs/
 
+EXPOSE 3000
 
-WORKDIR /usr/share/nginx/html
-
-
-COPY --from=react-build /app/out /usr/share/nginx/html 
-
-
-COPY nginx.conf /etc/nginx/
-
-EXPOSE 80 8090
-
-
-CMD ["nginx"]
