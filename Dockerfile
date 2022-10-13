@@ -17,9 +17,9 @@ FROM nginx:alpine
 WORKDIR /usr/share/nginx/html
 
 
-COPY --from=react-build /app/ /usr/share/nginx/html 
+COPY --from=react-build /app/out /usr/share/nginx/html 
 
-EXPOSE 80
+EXPOSE 8090
 
 
 CMD ["nginx"]
