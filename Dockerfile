@@ -19,6 +19,9 @@ WORKDIR /usr/share/nginx/html
 
 COPY --from=react-build /app/out /usr/share/nginx/html 
 
+
+COPY nginx.conf /etc/nginx/
+
 EXPOSE 8090
 
 
