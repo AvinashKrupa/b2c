@@ -1,7 +1,22 @@
-FROM nginx
 
-COPY /var/lib/jenkins/workspace/b2c/out/* /usr/share/nginx/html
+FROM node:10 ad builder
 
-EXPOSE 80
+WORKDIR /app
 
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
+
+COPY . .
+
+
+RUN npm build
+
+
+FROM nginx:alpine
+
+
+WORKDIR /usr/share/nginx/html
+
+
+COPY--from=builder /app/build .
+
+
+CMD ["nginx", "-g", "daemon off;"]
