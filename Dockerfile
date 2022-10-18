@@ -10,9 +10,9 @@ RUN npm install
 
 RUN npm run build
 
-FROM httpd:2.4
+FROM nginx:latest
 
-COPY --from=react-build /app/out/* /usr/local/apache2/htdocs/
+COPY --from=react-build /app/out/* /var/www/html/
 
-EXPOSE 80 3000 
+EXPOSE 80
 
